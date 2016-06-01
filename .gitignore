@@ -2,3 +2,11 @@
 OpenGLTest1/Debug/OpenGLTest1.pdb
 OpenGLTest1/OpenGLTest1.v12.suo
 *.sdf
+*.obj
+*.dll
+*.log
+*.pch
+*.idb
+*.pdb
+*.tlog
+*.lastbuildstate
