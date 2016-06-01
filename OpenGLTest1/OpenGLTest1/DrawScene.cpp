@@ -68,36 +68,53 @@ std::tuple<GLuint, GLuint> SetupShaderIO()
 }
 
 void DisplayTriangles(
-	GLuint hArrayBuffer,
-	GLuint hVertexArrayObject,
+	GLuint i_hArrayBuffer,
+	GLuint i_hVertexArrayObject,
 	GLint i_nTriangleCount,
 	const GLfloat * i_vertices)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	//set array buffer as active, copy 'vertices' into buffer
-	glBindBuffer(GL_ARRAY_BUFFER, hArrayBuffer);
-	glBindVertexArray(hVertexArrayObject);
+	glBindBuffer(GL_ARRAY_BUFFER, i_hArrayBuffer);
+	glBindVertexArray(i_hVertexArrayObject);
 
-	unsigned int nVertexCount = 3 * i_nTriangleCount;
-	unsigned int nComponentCount = 2 * nVertexCount;
+	unsigned int nVertexCount = 3U * i_nTriangleCount;
+	unsigned int nComponentCount = 2U * nVertexCount;
 	glBufferData(GL_ARRAY_BUFFER, sizeof(*i_vertices) * nComponentCount, i_vertices, GL_STATIC_DRAW);
-	glDrawArrays(GL_TRIANGLES, 0, nComponentCount);
+	glDrawArrays(GL_TRIANGLES, 0, nComponentCount); //%last argument should be i_nTriangleCount?
 
 	glFlush();
 }
 
+void DrawPhysicalObject(
+	GLuint i_hArrayBuffer, //%wrap these two into a struct
+	GLuint i_hVertexArrayObject,
+	const PhysicalObject & i_oObject)
+{
+	//Call display triangles after extracting the raw triangle data pointer, and triangle count
+	//Its not clear (to me) that the buffer object can be reused like this.
+	//Vertex array object should be fine, so long as the format of the buffer hasn't changed.
+	//Layout within a buffer could have alignment issues if using float on 64-bit system. Use nonzero stride to solve.
+	
+	DisplayTriangles(
+		i_hArrayBuffer,
+		i_hVertexArrayObject,
+		i_oObject.m_oWorldSpaceMesh.m_vectTriangles.size(),
+		i_oObject.m_oWorldSpaceMesh.m_vectTriangles.data()->data());
+}
+
 void DrawLoop()
 {
-	const unsigned int nTriangleCount = 2;
-	GLfloat anTestVertices[6][2] = //6 vertices, 2 components each
-	{
-		{0.0f, 0.0f}, {0.1f, 0.0f}, {0.0f, 0.1f},
-		{0.0f, 0.1f}, {0.1f, 0.0f}, {0.1f, 0.1f},
-	};
+	//const unsigned int nTriangleCount = 2U;
+	//GLfloat anTestVertices[6][2] = //6 vertices, 2 components each
+	//{
+	//	{0.0f, 0.0f}, {0.1f, 0.0f}, {0.0f, 0.1f},
+	//	{0.0f, 0.1f}, {0.1f, 0.0f}, {0.1f, 0.1f},
+	//};
 
 	//Setup shader io
-	GLuint hArrayBuffer, hVertexArrayObject;
+	GLuint hArrayBuffer, hVertexArrayObject; //%wrap into struct
 	std::tie(hArrayBuffer, hVertexArrayObject) = SetupShaderIO();
 
 	//Setup timers
@@ -106,11 +123,11 @@ void DrawLoop()
 
 	//Physical objects
 	float fVelocity = 0.01f;
-	PhysicalObject oPendulum(
-		4.0,
+	PhysicalObject oPendulum( //%constructor needs to be updated with display mesh
+		4.0, //mass
 		zero_matrix<double>(3U, 3U), 
 		zero_vector<double>(3U), 
-		fVelocity * unit_vector<double>(3U, 1U)); //v
+		fVelocity * unit_vector<double>(3U, 0U)); //v
 
 	while(true)
 	{
@@ -120,38 +137,39 @@ void DrawLoop()
 		{
 			nCurrentTime = std::chrono::steady_clock::now();
 		}
-		nTargetTime += std::chrono::milliseconds(10);
+		nTargetTime += std::chrono::milliseconds(10); //%this needs to tie in with advance state time
 		
 		//%need world space / model space / screen space conversion.
 		//%eventually you need to use shaders for this, and only deal in world space in the code.
 		//%need newtonian engine based on physical quantities with units and vector arithmetic.
-		//%a simple physics would be to have repulsion from boundary; simple harmonic oscillator.
 
-		oPendulum.AdvanceState(0.01);
-		//%reproduce constant velocity evolution here.
-		//%we need to construct the display scene from the model-space meshes.
+		oPendulum.AdvanceState(0.01); //%this needs to tie with loop time
 
-		//Step forward triangle
-		fVelocity += 0.0001f;
+		////Step forward triangle
+		//fVelocity += 0.0001f;
 
-		anTestVertices[0][0] += fVelocity; //%normalize movement to time
-		anTestVertices[1][0] += fVelocity;
-		anTestVertices[2][0] += fVelocity;
+		//anTestVertices[0][0] += fVelocity; //%normalize movement to time
+		//anTestVertices[1][0] += fVelocity;
+		//anTestVertices[2][0] += fVelocity;
 
-		anTestVertices[3][0] += fVelocity; //%normalize movement to time
-		anTestVertices[4][0] += fVelocity;
-		anTestVertices[5][0] += fVelocity;
+		//anTestVertices[3][0] += fVelocity; //%normalize movement to time
+		//anTestVertices[4][0] += fVelocity;
+		//anTestVertices[5][0] += fVelocity;
 
 		//%need 'draw scene' that will draw scene based on a 'scene' object
 		//%the physics code would update a 'world' object
 		//%the scene object must be constructed from the world object.
-		//%this is done by windowing the world
 		//%an equivalence between world and scene can be used for now.
 
-		DisplayTriangles(
-			hArrayBuffer, 
-			hVertexArrayObject, 
-			nTriangleCount, 
-			&anTestVertices[0][0]);
+		DrawPhysicalObject(
+			hArrayBuffer,
+			hVertexArrayObject,
+			oPendulum);
+
+		//DisplayTriangles(
+		//	hArrayBuffer, 
+		//	hVertexArrayObject, 
+		//	nTriangleCount, 
+		//	&anTestVertices[0][0]);
 	}
 }

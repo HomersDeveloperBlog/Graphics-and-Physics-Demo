@@ -30,7 +30,11 @@ void lorenz(
 	const ublas::c_vector<double , 3U> & x,
 	ublas::c_vector<double, 3U> & dxdt,
 	double t);
-void write_lorenz(const c_vector<double, 3U> & x, const double t);
+
+void write_lorenz(
+	const c_vector<double, 3U> & x,
+	const double t);
+
 void odeintDemo();
 
 //This would be difficult to template by dimension, since angular dof != N
@@ -57,15 +61,11 @@ public:
 		bool bMassIsNonZero = !!m_dMass;
 		assert(bMassIsNonZero);
 
-		bool bInertiaTensorIsFullRank = true; //%code test
+		bool bInertiaTensorIsFullRank = true; //%missing test
 		assert(bInertiaTensorIsFullRank);
 
 		return bMassIsNonZero && bInertiaTensorIsFullRank;
 	}
-
-	//%later we will need a way of including a non-constant force.
-	//%say, through a further level of indirection (function pointer, arbitrary arguments)
-	//%or by making many evolution functions and picking them in the calling function.
 
 	//void operator()(
 	//	const c_vector<c_vector<double, 3U>, 2U> & adState,
@@ -81,7 +81,9 @@ public:
 		c_vector<double, 3U> & adState_Diff,
 		const double dTime)
 	{
-		adState_Diff = zero_vector<double>(3U);
+		//adState_Diff = zero_vector<double>(3U); //constant position.
+		//%create a modification that applies a constant velocity.
+		adState_Diff = 0.01 * unit_vector<double>(3U, 0U);
 	}
 
 //protected:
@@ -89,7 +91,7 @@ public:
 	c_matrix<double, 3U, 3U> m_aadInertia; //About centre of mass
 };
 
-//Should be dimension-templated
+//%Should be dimension-templated
 class PhysicalExtrinsicState
 {
 public:
@@ -107,12 +109,12 @@ public:
 	}
 
 	bool CheckState() const {return true;}
-
+	
 //protected:
 	c_vector<double, 3U> m_adPosition;
 	c_vector<double, 3U> m_adVelocity;
-	c_vector<double, 3U> m_adAngularPosition; //%I suppose specializations for symmetric objects could reduce dimension
-	c_vector<double, 3U> m_adAngularVelocity;
+	c_matrix<double, 3U, 3U> m_adAngularPosition; //%R matrix or quaternion
+	c_vector<double, 3U> m_adAngularVelocity; //%skew matrix or w-vector
 };
 
 class DisplayMesh
@@ -122,7 +124,7 @@ public:
 
 //protected:
 	//c_vector<double, 3U> m_adModelToWorldTranslation; //%already taken care of. physics position.
-	c_matrix<double, 3U, 3U> m_matModelToWorldAffine; //%already have an arbitrary rotation.
+	//c_matrix<double, 3U, 3U> m_matModelToWorldAffine; //%already have an arbitrary rotation.
 	//%That means this matrix need only be a rotation followed by a scaling.
 	//%might be safe to assume we don't need this functionality.
 	//%we can define everything in world space for now. Then just worry about how to map to the screen.
@@ -136,7 +138,7 @@ public:
 class PhysicalObject
 {
 public:
-	PhysicalObject() = default;
+	//PhysicalObject() = default;
 
 	PhysicalObject(
 		const double i_dMass,
@@ -156,16 +158,16 @@ public:
 	}
 
 	void AdvanceState(const double i_dDT)
-	{ //%An adaptive, time sensitive integrator, would be best.
-		runge_kutta4<c_vector<double, 3U>> stepper; //%this should be a data member somewhere.
+	{ //%An adaptive, time-sensitive integrator would be best.
+		runge_kutta4<c_vector<double, 3U>> stepper; 
 		stepper.do_step(
 			m_oIntrinsicState, //%a function object. somewhat opaque in this form.
 			m_oExtrinsicState.m_adPosition, //%we need to consolidate this into a single state.
-			0, 
+			0, //current time. %Could store last update? Have input provide current time?
 			i_dDT);
 	}
 
-protected:
+//protected:
 	PhysicalIntrinsicState m_oIntrinsicState; //%mechanics information
 	PhysicalExtrinsicState m_oExtrinsicState; //%position + orientation. also needed for display/collision.
 	//ConvexPolyhedron m_oConvexPolyhedron;//collision geometry
