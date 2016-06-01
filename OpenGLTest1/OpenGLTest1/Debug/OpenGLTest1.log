@@ -1,0 +1,45 @@
+﻿  main.cpp
+c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(72): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(104): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+  Physics.cpp
+c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(72): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(104): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory(349): warning C4996: 'std::_Uninitialized_copy0': Function call with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory(336): note: see declaration of 'std::_Uninitialized_copy0'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\storage.hpp(94): note: see reference to function template instantiation '_FwdIt std::uninitialized_copy<const double*,double*>(_InIt,_InIt,_FwdIt)' being compiled
+          with
+          [
+              _FwdIt=double *,
+              _InIt=const double *
+          ]
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\storage.hpp(89): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector.hpp(120): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix.hpp(102): note: see reference to class template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>' being compiled
+          with
+          [
+              T=double
+          ]
+  c:\users\jordan\documents\visual studio 2013\projects\opengltest1\opengltest1\physics.cpp(8): note: see reference to class template instantiation 'boost::numeric::ublas::matrix<double,boost::numeric::ublas::row_major,boost::numeric::ublas::unbounded_array<T,std::allocator<T>>>' being compiled
+          with
+          [
+              T=double
+          ]
+  DrawScene.cpp
+c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(72): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(104): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+  Generating Code...
+  OpenGLTest1.vcxproj -> C:\Users\Jordan\Documents\Visual Studio 2013\Projects\OpenGLTest1\Debug\OpenGLTest1.exe
