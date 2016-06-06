@@ -1,6 +1,10 @@
 #pragma once
 
-enum ShaderSource { eVertexShaderSource, eFragmentShaderSource, nShaderSourceCount };
+enum ShaderSource 
+{
+	eVertexShaderSource, eFragmentShaderSource, 
+	nShaderSourceCount
+};
 
 static const char * astrShaderSources[nShaderSourceCount] =
 {
@@ -11,7 +15,8 @@ static const char * astrShaderSources[nShaderSourceCount] =
 	"void main()                            \n"
 	"{                                      \n"
 	"	gl_Position = vPosition;            \n"
-	"}",
+	"}"
+	,
 
 	"#version 430 core                      \n"
 	"                                       \n"
