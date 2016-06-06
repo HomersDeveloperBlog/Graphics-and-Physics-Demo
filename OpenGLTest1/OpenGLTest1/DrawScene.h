@@ -2,16 +2,14 @@
 
 #include <tuple>
 
-using namespace std;
-
 void InitializeOpenGLEnvironment();
 
-tuple<GLuint, GLuint> SetupShaderIO();
+std::tuple<GLuint, GLuint> SetupShaderIO(); //%export necessary?
 
-void DisplayTriangles(
+void DisplayTriangles( //%export necessary?
 	GLuint hArrayBuffer,
 	GLuint hVertexArrayObject,
-	GLint i_nTriangleCount,
-	const GLfloat * i_vertices);
+	GLuint i_nTriangleCount,
+	const GLfloat * i_aafTriangles);
 
-void DrawLoop();
+void DrawLoop(); //%surely, this function has some inputs

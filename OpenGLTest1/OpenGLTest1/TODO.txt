@@ -1,0 +1,18 @@
+TODO:
+
+Next build:
+Need to connect the physical object to stored mesh data
+Need to connect our scene drawing to the physical object mesh data
+
+Later:
+Place our meshes model space and our physical objects in world space.
+Render onto screen space using CPU code.
+
+Graphics: Full vertex shader. Textures. Lighting. Shadows.
+Physics: Something interesting.
+
+Eventually:
+Shader compilation code is pretty bad. Loading from file would be nice.
+Connecting the mesh input to some 3D object database. Then a non-procedural mesh could be used.
+Accurate convex hull computations from display mesh. (boost::geometry)
+Accurate inertia computations from convex hull. (Some published formula)

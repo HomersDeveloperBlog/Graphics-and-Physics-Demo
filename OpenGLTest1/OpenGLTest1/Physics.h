@@ -17,7 +17,7 @@ class PhysicalIntrinsicState
 public:
 	PhysicalIntrinsicState()
 		: m_dMass(0.0),
-		m_aadInertia(zero_matrix<double>(3U, 3U)) {} //%this won't fly with evolution operator
+		m_aadInertia(zero_matrix<double>(3U, 3U)) {} //Invalid state
 
 	PhysicalIntrinsicState(
 		const double i_dMass,
@@ -39,30 +39,12 @@ public:
 		return bMassIsNonZero && bInertiaTensorIsFullRank;
 	}
 
-	// void operator()(
-	// 	const c_vector<double, 3U> & adState,
-	// 	c_vector<double, 3U> & adState_Diff,
-	// 	const double dTime)
-	// {
-	// 	//adState_Diff = zero_vector<double>(3U); //constant position.
-	// 	adState_Diff = 0.01 * unit_vector<double>(3U, 0U);
-	// }
-
-	// void operator()(
-	// 	const c_vector<c_vector<double, 3U>, 2U> & adState,
-	// 	c_vector<c_vector<double, 3U>, 2U> & adState_Diff,
-	// 	const double dTime)
-	// {
-	// 	adState_Diff[0] = adState[1]; //x' = v
-	// 	adState_Diff[1] = 0.0 * (1.0 / m_dMass); //v' = 1/m * F
-	// }
-	
 	//%odeint probably requires PhysicalExtrinsicState to allow +, *scalar.
 	//http://headmyshoulder.github.io/odeint-v2/doc/boost_numeric_odeint/odeint_in_detail/state_types__algebras_and_operations.html
 	//We must support addition of state_type's and scalar multiplication by time_type
 	void operator()(
 		const PhysicalExtrinsicState & i_adState,
-		PhysicalExtrinsicState & o_adState_Diff,
+		PhysicalExtrinsicState & o_adState_Diff, //%aliasing
 		const double i_dTime)
 	{
 		o_adState_Diff.m_adPosition = i_adState.m_adVelocity;
@@ -96,25 +78,30 @@ public:
 		o_adState_Diff.m_adAngularVelocity = inverse(aadTransformedInertia) * adAngularMomentum;
 	}
 
-//protected:
+protected:
 	double m_dMass; //%Should be inverse mass?
 	c_matrix<double, 3U, 3U> m_aadInertia; //About centre of mass, in canonical frame. 
 	//Should be I^-1? We need both, so we could store both.
 };
 
-//%Should be dimension-templated
 class PhysicalExtrinsicState
 {
 public:
 	PhysicalExtrinsicState()
 		: m_adPosition(zero_vector<double>(3U)),
-		m_adVelocity(zero_vector<double>(3U)) {}
+		m_adVelocity(zero_vector<double>(3U)),
+		m_adAngularPosition(zero_matrix<double>(3U, 3U)),
+		m_adAngularVelocity(zero_vector<double>(3U)) {}
 
 	PhysicalExtrinsicState(
 		const c_vector<double, 3U> & i_adPosition,
-		const c_vector<double, 3U> & i_adVelocity)
+		const c_vector<double, 3U> & i_adVelocity,
+		const c_matrix<double, 3U, 3U> & i_adAngularPosition,
+		const c_vector<double, 3U> & i_adAngularVelocity)
 		: m_adPosition(i_adPosition),
-		m_adVelocity(i_adVelocity) 
+		m_adVelocity(i_adVelocity),
+		m_adAngularPosition(i_adAngularPosition),
+		m_adAngularVelocity(i_adAngularVelocity)
 	{
 		assert(CheckState());
 	}
@@ -127,7 +114,9 @@ public:
 		return true;
 	}
 	
-//protected:
+	friend PhysicalIntrinsicState;
+	
+protected:
 	c_vector<double, 3U> m_adPosition;
 	c_vector<double, 3U> m_adVelocity;
 	c_matrix<double, 3U, 3U> m_adAngularPosition; //R matrix
@@ -137,13 +126,37 @@ public:
 class DisplayMesh
 {
 public:
-	//DisplayMesh() = default;
-	//Constructor should accept raw data.
+	DisplayMesh(
+		size_t i_nTriangleCount, //%probably an object handle would be better.
+		const double * i_aadTriangles,
+		double i_dIsotropicScaling,
+		const c_vector<double, 3U> & i_adWorldSpacePosition,
+		const c_matrix<double, 3U, 3U> & i_aadWorldSpaceFrame)
+	{
+		m_vectTriangles.reserve(i_nTriangleCount);
+		
+		for(size_t nTriangle = 0U;
+			nTriangle < i_nTriangleCount;
+			++nTriangle)
+		{
+			//Parse the raw array into a std::array<c_vector<double, 3U>, 3U>
+			//Transform it using ublas arithmetic
+			//Push onto the vector
+		}
+		
+		//%might make sense to include an openGL type conversion layer here.
+		//%that is, store as openGL types. Ignore for now. I want to try to match the binary.
+	}
 	
-	//%we are missing a way to include a scale
-	//%we could include the intial model to world transform in the constructor arguments.
+	//%-_- this architecture will not respond to moving objects
+	//%you will have to store the literal length/pointer to data. 
+	//%A handle / database scheme is going to be hard at compile time.
+	//%I'm thinking an enum with model names, and a file name. We would have to load each mesh into a buffer
+	//The buffers would be stored index by the enum into a MeshDatabase singleton.
 	
-//protected:
+protected:
+	//%we don't want to have to have to input/output uniforms so its best to store transformed data here.
+	//%alternatively we store only a handle to the model space mesh, and store transformation instructions.
 	typedef std::array<c_vector<double, 3U>, 3U> TTriangle;
 	std::vector<TTriangle> m_vectTriangles;
 };
@@ -155,9 +168,11 @@ public:
 		const double i_dMass,
 		const c_matrix<double, 3U, 3U> & i_aadInertia,
 		const c_vector<double, 3U> & i_adPosition,
-		const c_vector<double, 3U> & i_adVelocity)
+		const c_vector<double, 3U> & i_adVelocity,
+		const c_matrix<double, 3U, 3U> & i_adAngularPosition,
+		const c_vector<double, 3U> & i_adAngularVelocity)
 		: m_oIntrinsicState(i_dMass, i_aadInertia),
-		m_oExtrinsicState(i_adPosition, i_adVelocity)
+		m_oExtrinsicState(i_adPosition, i_adVelocity, i_adAngularPosition, i_adAngularVelocity)
 	{
 		assert(CheckState());
 	}
@@ -172,7 +187,7 @@ public:
 	{
 		runge_kutta4<c_vector<double, 3U>> stepper; //%An adaptive integrator with non-uniform time-step would be best.
 		stepper.do_step(
-			m_oIntrinsicState.operator(),
+			m_oIntrinsicState, //.operator(),
 			m_oExtrinsicState, //State info to evolve.
 			0, //current time. %Could store last update? Have AdvanceState input provide current time?
 			i_dDT);
@@ -186,9 +201,9 @@ public:
 		//Select an integrator with an energy preserving property.
 	}
 
-//protected:
-	PhysicalIntrinsicState m_oIntrinsicState; //%mechanics information
-	PhysicalExtrinsicState m_oExtrinsicState; //%position + orientation. also needed for display/collision.
+protected:
+	PhysicalIntrinsicState m_oIntrinsicState; //mechanics information
+	PhysicalExtrinsicState m_oExtrinsicState; //position + orientation. also needed for display/collision.
 	//ConvexPolyhedron m_oConvexPolyhedron; //collision geometry. also world space
-	DisplayMesh * m_oWorldSpaceMesh; //display geometry
+	DisplayMesh m_oWorldSpaceMesh; //display geometry
 };

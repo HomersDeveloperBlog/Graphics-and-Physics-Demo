@@ -63,14 +63,14 @@ std::tuple<GLuint, GLuint> SetupShaderIO()
 		nVectorStride,
 		(void*)(0));
 	glEnableVertexAttribArray(vPosition);
-
+	
 	return make_pair(hArrayBuffer, hVertexArrayObject);
 }
 
 void DisplayTriangles(
 	GLuint i_hArrayBuffer,
 	GLuint i_hVertexArrayObject,
-	GLint i_nTriangleCount,
+	GLuint i_nTriangleCount,
 	const GLfloat * i_vertices)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -106,13 +106,6 @@ void DrawPhysicalObject(
 
 void DrawLoop()
 {
-	//const unsigned int nTriangleCount = 2U;
-	//GLfloat anTestVertices[6][2] = //6 vertices, 2 components each
-	//{
-	//	{0.0f, 0.0f}, {0.1f, 0.0f}, {0.0f, 0.1f},
-	//	{0.0f, 0.1f}, {0.1f, 0.0f}, {0.1f, 0.1f},
-	//};
-
 	//Setup shader io
 	GLuint hArrayBuffer, hVertexArrayObject; //%wrap into struct
 	std::tie(hArrayBuffer, hVertexArrayObject) = SetupShaderIO();
@@ -124,52 +117,35 @@ void DrawLoop()
 	//Physical objects
 	float fVelocity = 0.01f;
 	PhysicalObject oPendulum( //%constructor needs to be updated with display mesh
-		4.0, //mass
-		zero_matrix<double>(3U, 3U), 
-		zero_vector<double>(3U), 
-		fVelocity * unit_vector<double>(3U, 0U)); //v
+		4.0,
+		identity_matrix<double>(3U),
+		zero_vector<double>(3U),
+		fVelocity * unit_vector<double>(3U, 0U),
+		identity_matrix<double>(3U),
+		zero_vector<double>(3U));
 
 	while(true)
 	{
 		//So one way of getting this to be timed is to make a thread that manages the time and then triggers events.
-		//We have no need for a complex real-time event engine right now.
+		//We have no need for a real-time event engine right now.
 		while(nCurrentTime < nTargetTime)
 		{
 			nCurrentTime = std::chrono::steady_clock::now();
 		}
 		nTargetTime += std::chrono::milliseconds(10); //%this needs to tie in with advance state time
 		
-		//%need world space / model space / screen space conversion.
-		//%eventually you need to use shaders for this, and only deal in world space in the code.
-		//%need newtonian engine based on physical quantities with units and vector arithmetic.
-
-		oPendulum.AdvanceState(0.01); //%this needs to tie with loop time
-
-		////Step forward triangle
-		//fVelocity += 0.0001f;
-
-		//anTestVertices[0][0] += fVelocity; //%normalize movement to time
-		//anTestVertices[1][0] += fVelocity;
-		//anTestVertices[2][0] += fVelocity;
-
-		//anTestVertices[3][0] += fVelocity; //%normalize movement to time
-		//anTestVertices[4][0] += fVelocity;
-		//anTestVertices[5][0] += fVelocity;
-
+		//%need model space / world space / screen space conversion.
 		//%need 'draw scene' that will draw scene based on a 'scene' object
 		//%the physics code would update a 'world' object
 		//%the scene object must be constructed from the world object.
-		//%an equivalence between world and scene can be used for now.
+		//%in other words, we ultimately need a scene graph
+		
+		oPendulum.AdvanceState(0.01); //%this needs to tie with loop time
 
+		//%must take camera position / view frame
 		DrawPhysicalObject(
 			hArrayBuffer,
 			hVertexArrayObject,
 			oPendulum);
-
-		//DisplayTriangles(
-		//	hArrayBuffer, 
-		//	hVertexArrayObject, 
-		//	nTriangleCount, 
-		//	&anTestVertices[0][0]);
 	}
 }
