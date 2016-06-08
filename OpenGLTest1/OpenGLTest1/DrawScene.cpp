@@ -58,7 +58,7 @@ std::tuple<GLuint, GLuint> SetupShaderIO()
 	glVertexAttribPointer(
 		vPosition,
 		nVectorDimension,
-		GL_FLOAT,
+		GL_DOUBLE,
 		GL_FALSE,
 		nVectorStride,
 		(void*)(0));
@@ -71,7 +71,7 @@ void DisplayTriangles(
 	GLuint i_hArrayBuffer,
 	GLuint i_hVertexArrayObject,
 	GLuint i_nTriangleCount,
-	const GLfloat * i_vertices)
+	const GLdouble * i_vertices) //%type here may vary by vertexattribute
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -97,11 +97,14 @@ void DrawPhysicalObject(
 	//Vertex array object should be fine, so long as the format of the buffer hasn't changed.
 	//Layout within a buffer could have alignment issues if using float on 64-bit system. Use nonzero stride to solve.
 	
+	assert(!(i_oObject.ModelData().size() % 9U));
+	size_t nTriangleCount = i_oObject.ModelData().size() / 9U;
+	
 	DisplayTriangles(
 		i_hArrayBuffer,
 		i_hVertexArrayObject,
-		i_oObject.m_oWorldSpaceMesh.m_vectTriangles.size(),
-		i_oObject.m_oWorldSpaceMesh.m_vectTriangles.data()->data());
+		nTriangleCount,
+		i_oObject.ModelData().data());
 }
 
 void DrawLoop()
@@ -123,6 +126,8 @@ void DrawLoop()
 		fVelocity * unit_vector<double>(3U, 0U),
 		identity_matrix<double>(3U),
 		zero_vector<double>(3U));
+
+	//%need scene graph: a vector of physical objects.
 
 	while(true)
 	{
