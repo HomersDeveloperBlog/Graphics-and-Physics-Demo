@@ -163,7 +163,7 @@ public:
 		c_matrix<double, 3U, 3U> i_aadModelToWorld)
 		: m_aadModelToWorld(i_aadModelToWorld) //%needs conversion to ogl format.
 	{
-		size_t nComponentCount = 3U * 3U * i_nTriangleCount;
+		size_t nComponentCount = 3U * 2U * i_nTriangleCount; //%Later needs to draw from 3D source
 		m_vectModelSpaceTriangles.reserve(nComponentCount);
 		
 		for(size_t nComponent = 0U;

@@ -84,7 +84,7 @@ void DisplayTriangles(
 	glBufferData(GL_ARRAY_BUFFER, sizeof(*i_vertices) * nComponentCount, i_vertices, GL_STATIC_DRAW);
 	glDrawArrays(GL_TRIANGLES, 0, nComponentCount); //%last argument should be i_nTriangleCount?
 
-	glFlush();
+	glFlush(); //%not sure what would happen if this were removed.
 }
 
 void DrawPhysicalObject(
@@ -96,6 +96,24 @@ void DrawPhysicalObject(
 	//Its not clear (to me) that the buffer object can be reused like this.
 	//Vertex array object should be fine, so long as the format of the buffer hasn't changed.
 	//Layout within a buffer could have alignment issues if using float on 64-bit system. Use nonzero stride to solve.
+	
+	//%declare a variable in shader qualified by 'uniform'
+	//%I believe all shaders in a linked program have a common namespace
+	//To load a value in, we must request its location from its lexical name. 
+	// GLint glGetUniformLocation(GLuint program, const char* name);
+	//Could return -1 if invalid. Will not change in program.
+	//Then set the value using
+	// void glUniform{1234}{fdi ui}(GLint location, TYPE value);
+	// void glUniform{1234}{fdi ui}v(GLint location, GLsizei count, const TYPE * values);
+	// void glUniformMatrix{234}{fd}v(GLint location, GLsizei count, GLboolean transpose, const GLfloat * values);
+	//Tranpose should be true for C-like arrays. GLSL is column major iternall, C is row major.
+	//The count allows for the possibility of many such matrices, stored serially.
+	
+	//%types should probably be converted to GL_FLOAT
+	//%otherwise change shaders to accept dvect4, ect.
+	//%and the vertexattributepointer call must be adjusted.
+	//%might work anyway, if regular v.a.p. function is called, double is automatically downconverted to float.
+	//%see vertex specification section.
 	
 	assert(!(i_oObject.ModelData().size() % 9U));
 	size_t nTriangleCount = i_oObject.ModelData().size() / 9U;

@@ -1,18 +1,17 @@
 TODO:
-
-Next build:
-Need to connect the physical object to stored mesh data
-Need to connect our scene drawing to the physical object mesh data
+Refactor physics, graphics (3D data, currently 2D).
+Render onto screen space using CPU code.
+The same thing with OGL uniforms.
 
 Later:
-Place our meshes model space and our physical objects in world space.
-Render onto screen space using CPU code.
+A way to apply forces/torques to the object. Reduces to force-contact point.
 
-Graphics: Full vertex shader. Textures. Lighting. Shadows.
+Graphics: Textures. Lighting. Shadows.
 Physics: Something interesting.
+Interactivity: Trackball rotation
 
 Eventually:
 Shader compilation code is pretty bad. Loading from file would be nice.
-Connecting the mesh input to some 3D object database. Then a non-procedural mesh could be used.
+Connecting the mesh input to some 3D object database.
 Accurate convex hull computations from display mesh. (boost::geometry)
 Accurate inertia computations from convex hull. (Some published formula)
