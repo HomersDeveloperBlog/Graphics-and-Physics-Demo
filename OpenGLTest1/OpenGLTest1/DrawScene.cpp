@@ -29,7 +29,6 @@ void InitializeOpenGLEnvironment()
 	glutInitContextVersion(2, 0);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	glutCreateWindow("Pendulum");
-	//%Experiment with rearranging this and the glew init. See what dependencies there are.
 
 	//Initialize OpenGL Extension Wrangler (link opengl functions)
 	if (glewInit())
@@ -55,13 +54,13 @@ std::tuple<GLuint, GLuint> SetupShaderIO()
 	//Set how "vposition" (layout location 0) in vertex shader loads from currently active buffer (vertices)
 	const int nVectorDimension = 2;
 	const int nVectorStride = 0;
-	glVertexAttribPointer(
+	glVertexAttribPointer( //Targets float data input to vertex shader. use 'L' for double
 		vPosition,
 		nVectorDimension,
-		GL_DOUBLE,
-		GL_FALSE,
+		GL_FLOAT, //buffer type (converted from this type to foat)
+		GL_FALSE, //normalize?
 		nVectorStride,
-		(void*)(0));
+		(void*)(0)); //offset from start of bound GL_ARRAY_BUFFER
 	glEnableVertexAttribArray(vPosition);
 	
 	return make_pair(hArrayBuffer, hVertexArrayObject);
@@ -81,13 +80,20 @@ void DisplayTriangles(
 
 	unsigned int nVertexCount = 3U * i_nTriangleCount;
 	unsigned int nComponentCount = 2U * nVertexCount;
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*i_vertices) * nComponentCount, i_vertices, GL_STATIC_DRAW);
-	glDrawArrays(GL_TRIANGLES, 0, nComponentCount); //%last argument should be i_nTriangleCount?
+	glBufferData(
+		GL_ARRAY_BUFFER, 
+		sizeof(*i_vertices) * nComponentCount, 
+		i_vertices, 
+		GL_STATIC_DRAW);
+	glDrawArrays(
+		GL_TRIANGLES,
+		0, //Start index
+		nComponentCount); //%last argument should be i_nTriangleCount?
 
 	glFlush(); //%not sure what would happen if this were removed.
 }
 
-void DrawPhysicalObject(
+void DrawPhysicalObject( //%member of physical object?
 	GLuint i_hArrayBuffer, //%wrap these two into a struct
 	GLuint i_hVertexArrayObject,
 	const PhysicalObject & i_oObject)
@@ -125,17 +131,50 @@ void DrawPhysicalObject(
 		i_oObject.ModelData().data());
 }
 
-void DrawLoop()
+class SceneGraph
+{
+	//SceneGraph() = default;
+	
+	//We won't try to separate objects that require physics and objects that require drawing. 
+	//We also won't try to determine what does and does not need drawing.
+	
+	void AddObject(const PhysicalObject * i_pNewObject)
+	{
+		vectObjects.push_back(i_pNewObject);
+	}
+	
+	void AdvanceStates(double i_dDT)
+	{
+		//Compute forces
+		
+		//Step states
+		for(PhysicalObject * pObject : vectObjects)
+		{
+			pObject->AdvanceState(i_dT);
+		}
+	}
+	
+	void DrawScene()
+	{
+		//Draw objects
+		for(PhysicalObject * pObject : vectObjects)
+		{
+			//pObject->Draw();
+		}
+	}
+	
+protected:
+	vector<PhysicalObject *> vectObjects; //%not a raw pointer
+	//Active opengl objects?
+};
+
+void GameUpdateLoop()
 {
 	//Setup shader io
 	GLuint hArrayBuffer, hVertexArrayObject; //%wrap into struct
-	std::tie(hArrayBuffer, hVertexArrayObject) = SetupShaderIO();
-
-	//Setup timers
-	std::chrono::steady_clock::time_point nCurrentTime = std::chrono::steady_clock::now();
-	std::chrono::steady_clock::time_point nTargetTime = std::chrono::steady_clock::now();
-
-	//Physical objects
+	tie(hArrayBuffer, hVertexArrayObject) = SetupShaderIO();
+	//%Should be done the first time each model is loaded.
+	
 	float fVelocity = 0.01f;
 	PhysicalObject oPendulum( //%constructor needs to be updated with display mesh
 		4.0,
@@ -144,28 +183,38 @@ void DrawLoop()
 		fVelocity * unit_vector<double>(3U, 0U),
 		identity_matrix<double>(3U),
 		zero_vector<double>(3U));
-
-	//%need scene graph: a vector of physical objects.
-
+		
+	//Setup timers
+	auto nUpdateInterval = chrono::milliseconds(16);
+	chrono::steady_clock::time_point nCurrentTime = chrono::steady_clock::now();
+	chrono::steady_clock::time_point nNextUpdateTime = nCurrentTime	+ nUpdateInterval;
+	
 	while(true)
 	{
-		//So one way of getting this to be timed is to make a thread that manages the time and then triggers events.
-		//We have no need for a real-time event engine right now.
-		while(nCurrentTime < nTargetTime)
+		//Wait until appropriate time.
+		while(nCurrentTime < nNextUpdateTime);
 		{
-			nCurrentTime = std::chrono::steady_clock::now();
+			nCurrentTime = chrono::steady_clock::now();
 		}
-		nTargetTime += std::chrono::milliseconds(10); //%this needs to tie in with advance state time
 		
-		//%need model space / world space / screen space conversion.
-		//%need 'draw scene' that will draw scene based on a 'scene' object
-		//%the physics code would update a 'world' object
-		//%the scene object must be constructed from the world object.
-		//%in other words, we ultimately need a scene graph
+		chrono::steady_clock::time_duration nTimeSinceLastUpdate = nCurrentTime - (nNextUpdateTime - nUpdateInterval);
+		nNextUpdateTime = nCurrentTime + nUpdateInterval;
+		//Are we sure we don't want += nUpdateInterval, with the option to 
+		//Skip updates if we fall behind. That is, consume events except most recent.
+		//Right now we are effectively specifying "at least 16 milliseconds update interval"
 		
-		oPendulum.AdvanceState(0.01); //%this needs to tie with loop time
-
-		//%must take camera position / view frame
+		double dTimeSinceLastUpdate = 0.001 * static_cast<double>(nTimeSinceLastUpdate); //%convert properly
+		assert(dTimeSinceLastUpdate > 0.0);
+		//%could store time since last update inside physics objects.
+		//%that way we can skip events without accumulating a deltaT
+		
+		//Input devices update
+		//Consuming this information: Update camera position/frame
+		
+		//Physics tick
+		oPendulum.AdvanceState(dTimeSinceLastUpdate);
+		
+		//Graphics update
 		DrawPhysicalObject(
 			hArrayBuffer,
 			hVertexArrayObject,

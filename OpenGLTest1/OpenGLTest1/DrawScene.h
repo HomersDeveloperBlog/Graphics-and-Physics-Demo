@@ -12,4 +12,4 @@ void DisplayTriangles( //%export necessary?
 	GLuint i_nTriangleCount,
 	const GLfloat * i_aafTriangles);
 
-void DrawLoop(); //%surely, this function has some inputs
+void GameUpdateLoop(); //%surely, this function has some inputs

@@ -12,13 +12,15 @@
 
 using namespace std;
 
-int main(int argc, char * argv[])
+int main(
+	int argc, 
+	char * argv[])
 {
 	//Initialize OpenGL environment, using glut, glew
 	InitializeOpenGLEnvironment();
-
+	
 	//Compile and link shaders
-	CompileShaders(); //%soft-code the input
+	CompileShaders(); //%un-hard-code the input
 	
 	//Then make a pendulum graphic. Possibly by importing an image.
 	//We will need to make a 'scene object' which the two loops will cooperate using.
@@ -35,13 +37,10 @@ int main(int argc, char * argv[])
 	//put triangular mesh processing and efficient dual-phase collision detection on your resume.
 	//Adjust percentages to seem more precise
 
-	DrawLoop();
-
+	GameUpdateLoop();
+	
 	//glutDisplayFunc(UpdateDisplay);
 	glutMainLoop();
-
-	ublasDemo();
-	odeintDemo();
 
 	return 0;
 }
