@@ -39,7 +39,7 @@ void InitializeOpenGLEnvironment()
 	}
 }
 
-std::tuple<GLuint, GLuint> SetupShaderIO()
+tuple<GLuint, GLuint> SetupShaderIO()
 {
 	//Generate array buffers
 	GLuint hArrayBuffer = 0;
@@ -55,7 +55,7 @@ std::tuple<GLuint, GLuint> SetupShaderIO()
 	const int nVectorDimension = 2;
 	const int nVectorStride = 0;
 	glVertexAttribPointer( //Targets float data input to vertex shader. use 'L' for double
-		vPosition,
+		vPosition, //layout number
 		nVectorDimension,
 		GL_FLOAT, //buffer type (converted from this type to foat)
 		GL_FALSE, //normalize?
@@ -70,7 +70,7 @@ void DisplayTriangles(
 	GLuint i_hArrayBuffer,
 	GLuint i_hVertexArrayObject,
 	GLuint i_nTriangleCount,
-	const GLdouble * i_vertices) //%type here may vary by vertexattribute
+	const GLfloat * i_vertices) //%type here may vary by vertexattribute
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
