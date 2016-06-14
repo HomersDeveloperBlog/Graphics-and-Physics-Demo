@@ -5,14 +5,6 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
-//%deprecated
-void CompileShaders();
-
-#define OGL_INVALID_SHADER_HANDLE static_cast<GLint>(0)
-#define OGL_INVALID_SHADER_HANDLE static_cast<GLint>(0)
-
 enum ShaderType : unsigned int 
 {
     VERTEX_SHADER_INTERNAL, FRAGMENT_SHADER_INTERNAL, 
@@ -27,32 +19,31 @@ const GLint ShaderEnumInternalToOGL[INTERNAL_SUPPORTED_SHADER_COUNT] =
 struct OpenGLShaderFile
 {
     ShaderType m_eShaderTypeInternal;
-    string m_strShaderFileName;
+    std::string m_strShaderFileName;
 };
 
 struct OpenGLProgramManifest
 {
-    vector<OpenGLShaderFile> m_vectShaderFiles;
+    std::vector<OpenGLShaderFile> m_vectShaderFiles;
 };
 
 struct OpenGLShaderSource
 {
     GLint m_glnShaderType;
-    string m_strShaderSource;
+    std::string m_strShaderSource;
 };
 
 struct OpenGLProgramSource
 {
-    vector<OpenGLShaderFile> m_vectShaderSources;
+    std::vector<OpenGLShaderFile> m_vectShaderSources;
 };
 
-// struct OpenGLShaderHandle
-// {
-//     ~OpenGLShaderHandle()
+bool GetOpenGLError(
+	const string & i_strFileName,
+	int nLineNumber);
     
-//     GLint m_nShaderHandle;
-// }
-
-//Automatic layout seems best, but you must be prepared for the compiler to eliminate inputs. 
-//Layout index is basically padded to float vec4's, with each row of a matrix indexed separately.
-//Layout requested via int GetAttribLocation(uint program, const char *name);
+ OpenGLProgram BuildProgramFromManifest(
+	const OpenGLProgramManifest & i_oManifest);
+    
+//%deprecated
+void CompileShaders();
