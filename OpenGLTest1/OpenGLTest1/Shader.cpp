@@ -1,16 +1,5 @@
-
+#include "GLSLBuild.h"
 #include "Shader.h"
-#include "ShaderBuild.h"
-
-//%If(OGLException e = GetOpenGLErrorState())
-//{
-//	RaiseException(e, __FILE__, __LINE__);
-//}
-//%Based on compiler flags, RaiseException will trace, assert, throw;
-//%OpenGL should be able to continue any error.
-//%This code doesn't skip unless we define some conversion to bool. 
-//%Note the code doesn't have to be this simple.
-//%We may want to support a context message.
 
 #define OGL_INVALID_SHADER_HANDLE static_cast<GLint>(0)
 

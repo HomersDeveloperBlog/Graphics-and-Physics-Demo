@@ -110,6 +110,52 @@ void OpenGLProgram::Use() const
         throw;
 }
 
+#define OGL_MAX_EXPECTED_SHADER_COUNT static_cast<GLsizei>(5)
+
+void OpenGLProgram::DetachAll()
+{
+    //Get attached shader count
+    GLint glnAttachedShaderCount = -1;
+    glGetProgramiv(
+        *m_pglnProgramHandle, 
+        GL_ATTACHED_SHADERS, 
+        &glnAttachedShaderCount);
+    assert(glnAttachedShaderCount >= 0);
+    if(GetOpenGLError(__FILE__, __LINE__)
+        || glnAttachedShaderCount < 0)
+        throw;
+    
+    //Success if no shaders attached.
+    if(!glnAttachedShaderCount)
+       return;
+       
+    GLsizei glnShadersWritten = -1;
+    GLuint aglnShaderHandles[OGL_MAX_EXPECTED_SHADER_COUNT] 
+        = {OGL_INVALID_SHADER_HANDLE};
+        
+    glGetAttachedShaders(	
+        *m_pglnProgramHandle,
+        OGL_MAX_EXPECTED_SHADER_COUNT,
+        glnShadersWritten,
+        aglnShaderHandles);
+    assert(glnShadersWritten == glnAttachedShaderCount);
+    if(GetOpenGLError(__FILE__, __LINE__)
+        || glnShadersWritten != glnAttachedShaderCount)
+        throw;
+        
+    for(int nShaderIndex = 0;
+        nShaderIndex < glnShadersWritten;
+        ++nShaderIndex)
+    {
+        assert(aglnShaderHandles[nShaderIndex] > 0);
+        glDetachShader(
+            *m_pglnProgramHandle, 
+            aglnShaderHandles[nShaderIndex]);
+        if(GetOpenGLError(__FILE__, __LINE__))
+            throw;
+    }
+}
+
 //%deprecated
 //true if error; false otherwise.
 bool LinkProgram(

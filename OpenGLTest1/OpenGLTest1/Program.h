@@ -20,10 +20,8 @@ class OpenGLProgram
     bool GetLinkStatus() const;
     bool Link();
     string GetLinkerMessage() const;
-    void Use() const
-    {
-        
-    }
+    void Use() const;
+    void DetachAll();
     
 private:
     shared_ptr<GLint> m_pglnProgramHandle;

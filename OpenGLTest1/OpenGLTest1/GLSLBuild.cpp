@@ -15,6 +15,57 @@
 //For glDebugMessageCallback, see:
 //See https://blog.nobel-joergensen.com/2013/02/17/debugging-opengl-part-2-using-gldebugmessagecallback/
 
+//%If(OGLException e = GetOpenGLErrorState())
+//{
+//	RaiseException(e, __FILE__, __LINE__);
+//}
+//%Based on compiler flags, RaiseException will trace, assert, throw;
+//%OpenGL should be able to continue any error.
+//%This code doesn't skip unless we define some conversion to bool. 
+//%Note the code doesn't have to be this simple.
+//%We may want to support a context message.
+
+//Convert ogl error code to string.
+string ConvertOGLErrorToString(
+	GLint i_gnlErrorCode)
+{
+	string strReturnValue;
+	switch(i_gnlErrorCode)
+	{
+		case GL_NO_ERROR:
+			strReturnValue = "GL_NO_ERROR";
+			break;
+		case GL_INVALID_ENUM:
+			strReturnValue = "GL_INVALID_ENUM";
+			break;
+		case GL_INVALID_VALUE:
+			strReturnValue = "GL_INVALID_VALUE";
+			break;
+		case GL_INVALID_OPERATION:
+			strReturnValue = "GL_INVALID_OPERATION";
+			break;
+		case GL_INVALID_FRAMEBUFFER_OPERATION:
+			strReturnValue = "GL_INVALID_FRAMEBUFFER_OPERATION";
+			break;
+		case GL_OUT_OF_MEMORY:
+			strReturnValue = "GL_OUT_OF_MEMORY";
+			break;
+		case GL_STACK_UNDERFLOW:
+			strReturnValue = "GL_STACK_UNDERFLOW";
+			break;
+		case GL_STACK_OVERFLOW:
+			strReturnValue = "GL_STACK_OVERFLOW";
+			break;
+		case 0:
+			strReturnValue = "Error inside function: glError().";
+			break;
+		default:
+			strReturnValue = "Unrecognized error code.";
+	}
+	
+	return strReturnValue;
+}
+
 //false if error free.
 bool GetOpenGLError(
 	const string & i_strFileName,
@@ -29,124 +80,94 @@ bool GetOpenGLError(
 		if(glnErrorCode != GL_NO_ERROR)
 		{
 			bReturnValue = true;
+			
 #ifdef _DEBUG
 			cerr << "FILE: " << i_strFileName << endl;
 			cerr << "LINE: " << nLineNumber << endl;
-			
-			//Convert ogl error code to string.
-			switch(glnErrorCode)
-			{
-				case GL_NO_ERROR:
-					cerr << "GL_NO_ERROR" << endl;
-					break;
-				case GL_INVALID_ENUM:
-					cerr << "GL_INVALID_ENUM" << endl;
-					break;
-				case GL_INVALID_VALUE:
-					cerr << "GL_INVALID_VALUE" << endl;
-					break;
-				case GL_INVALID_OPERATION:
-					cerr << "GL_INVALID_OPERATION" << endl;
-					break;
-				case GL_INVALID_FRAMEBUFFER_OPERATION:
-					cerr << "GL_INVALID_FRAMEBUFFER_OPERATION" << endl;
-					break;
-				case GL_OUT_OF_MEMORY:
-					cerr << "GL_OUT_OF_MEMORY" << endl;
-					break;
-				case GL_STACK_UNDERFLOW:
-					cerr << "GL_STACK_UNDERFLOW" << endl;
-					break;
-				case GL_STACK_OVERFLOW:
-					cerr << "GL_STACK_OVERFLOW" << endl;
-					break;
-				case 0:
-					cerr << "Error inside function: glError()." << endl;
-					break;
-			}
+			cerr << "ERROR: " << ConvertOGLErrorToString(glnErrorCode) << endl;
 #endif //_DEBUG
+
 		}
 	} while(glError != GL_NO_ERROR);
 	
 	return bReturnValue;
 }
 
-//Succeeds and builds a program you can use, or throws an exception.
-OpenGLProgram BuildProgramFromManifest(
+const static GLint aglnShaderEnumInternalToOGL[
+	INTERNAL_SUPPORTED_SHADER_COUNT] = 
+{
+    GL_VERTEX_SHADER, GL_FRAGMENT_SHADER
+};
+
+GLint OpenGLShaderSource::ConvertInternalShaderEnumToOGL(
+	ShaderType i_eShaderType)
+{
+	assert(i_eShaderType >= 0
+		&& i_eShaderType < INTERNAL_SUPPORTED_SHADER_COUNT);
+	if(i_eShaderType < 0
+		&& i_eShaderType >= INTERNAL_SUPPORTED_SHADER_COUNT)
+		throw;
+	
+	return aglnShaderEnumInternalToOGL[i_eShaderType];
+}
+
+OpenGLShaderSource::OpenGLShaderSource(
+    const OpenGLShaderFile & oShaderFile)
+{
+    m_glnShaderType = ConvertInternalShaderEnumToOGL(
+		oShaderFile.m_eShaderTypeInternal);
+	m_strShaderSource = ReadFileToBuffer(
+		oShaderFile.m_strShaderFileName);
+}
+	
+OpenGLProgramSource::OpenGLProgramSource(
 	const OpenGLProgramManifest & i_oManifest)
 {
-	//Load shader sources
-	OpenGLProgramSource oProgramSource; //%make this a constructor.
-	for(const OpenGLShaderFile & oShaderFile 
-		: i_oManifest.m_vectShaders)
-	{
-		OpenGLProgramSource oShaderSource; //%make this a constructor?
-		oShaderSource.m_glnShaderType = ConvertInternalShaderEnumToOGL(
-			oShaderFile.m_eShaderTypeInternal);
-		oShaderSource.m_strShaderSource = ReadFileToBuffer(
-			oShaderFile.m_strShaderFileName);
-		//%read return values.
-		
-		oProgramSource.m_vectShaderSources.push_back(oShaderSource);
-	}
-	
+    for(const OpenGLShaderFile & oShaderFile 
+        : i_oManifest.m_vectShaders)
+    {
+        OpenGLShaderSource oShaderSource(oShaderFile);
+        m_vectShaderSources.push_back(oShaderSource);
+    }
+}
+
+//Succeeds and builds a program you can use, or throws an exception.
+OpenGLProgram OpenGLProgramSource::BuildProgramFromSource()
+{
 	//Create program
-	GLuint glnProgramHandle = glCreateProgram();
-	assert(glnProgramHandle > OGL_INVALID_PROGRAM_HANDLE);
-	if(GetOpenGLError(__FILE__, __LINE__)
-		|| glnProgramHandle <= OGL_INVALID_PROGRAM_HANDLE)
-	{
-		assert(!glIsProgram(glnProgramHandle));
-		return OGL_INVALID_PROGRAM_HANDLE;
-	}
+	OpenGLProgram oProgram;
 	
 	//Create, compile, and attach shaders
-	vector<GLint> vectShaderHandles; //%currently, these are all leaked on exit.
-	vectShaderHandles.reserve(oProgramSource.m_vectShaderSoruces.size());
-	//%should probably be eliminated in favour of program.detachall();
-	
 	for(const OpenGLShaderSource oShaderSource 
-		: oProgramSource.m_vectShaderSources)
+		: m_vectShaderSources)
 	{
-		//Create and compile shader.
-		GLint glnShaderHandle = CompileShaderFromSource(oShaderSource);
-		if(glnShaderHandle == OGL_INVALID_SHADER_HANDLE)
-		{
-			glDeleteProgram(glnProgramHandle);
-			assert(!GetOpenGLError(__FILE__, __LINE__));
-			return OGL_INVALID_PROGRAM_HANDLE;
-		}
+		//Create shader
+		OpenGLShader oShader(oShaderSource); 
 
+		//Compile shader
+		if(!oShader.Compile())
+			throw;
+			
+#ifdef _DEBUG
+		//Print compiler message
+		cerr << oShader.GetCompilerMessage() << endl;
+#endif //_DEBUG
+		
 		//Attach shader
-		glAttachShader(glnProgramHandle, glnShaderHandle);
-		if(GetOpenGLError(__FILE__, __LINE__))
-		{
-			glDeleteProgram(glnProgramHandle);
-			assert(!GetOpenGLError(__FILE__, __LINE__));
-			return OGL_INVALID_PROGRAM_HANDLE;
-		}
-	
-		vectShaderHandles.push_back(glnShaderHandle);
+		oProgram.Attach(oShader);
 	}
 	
 	//Link program
-	//%probably want a way to return compiler/linker message as string.
-	//%should not stop us from detaching/deleting shaders.
-	//%defer error handling until after cleanup.
-	//%in RAII'd version, use return value to decide deletion.
-	if(oProgram.Link()))
-	{
-		glDeleteProgram(glnProgramHandle);
-		assert(!GetOpenGLError(__FILE__, __LINE__));
-		return OGL_INVALID_PROGRAM_HANDLE; 
-	}
-	
-	//Detatch all shaders. Deletion will occur at scope exit.
-	for(const GLint glnShaderHandle
-		: vectShaderHandles)
-	{
-		oProgram.Detach(glnShaderHandle);
-	}
+	if(!oProgram.Link()))
+		throw;
+		
+#ifdef _DEBUG
+	//Print linker message
+	cerr << oProgram.GetLinkerMessage() << endl;
+#endif //_DEBUG
+
+	//Detatch all shaders.
+	oProgram.DetachAll();
 	
 	return oProgram;
 }
@@ -210,10 +231,6 @@ GLint BuildOpenGLProgram(
 	}
 	
 	//Link program
-	//%probably want a way to return compiler/linker message as string.
-	//%should not stop us from detaching/deleting shaders.
-	//%defer error handling until after cleanup.
-	//%in RAII'd version, use return value to decide deletion.
 	if(LinkProgram(glnProgramHandle))
 	{
 		glDeleteProgram(glnProgramHandle);
@@ -236,6 +253,7 @@ GLint BuildOpenGLProgram(
 	return glnProgramHandle;
 }
 
+//%deprecated.
 void CompileShaders()
 {
 	//Compile shaders, starting with vertex shader object
