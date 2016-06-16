@@ -1,6 +1,3 @@
-//as;lfkja;lskdjf
-//;lsdjlkd
-
 #include "stdafx.h"
 #include "assert.h"
 #include <chrono>
@@ -28,15 +25,11 @@ void InitializeOpenGLEnvironment()
 	glutInitWindowSize(512, 512); //%can this go at the end before the window name?
 	glutInitContextVersion(2, 0);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
-	glutCreateWindow("Pendulum");
+	glutCreateWindow("Physics and OpenGL Demo");
 
 	//Initialize OpenGL Extension Wrangler (link opengl functions)
 	if (glewInit())
-	{
-		//%Replace this with your own error handling.
-		//cerr << "Unable to initialize GLEW ... exiting" << endl;
-		exit(EXIT_FAILURE);
-	}
+		throw;
 }
 
 tuple<GLuint, GLuint> SetupShaderIO()
@@ -51,12 +44,13 @@ tuple<GLuint, GLuint> SetupShaderIO()
 	glGenVertexArrays(1, &hVertexArrayObject); //generate handles for VA's
 	glBindVertexArray(hVertexArrayObject); //set triangle VA as active
 
+	//glGetAttribLocation();
 	//Set how "vposition" (layout location 0) in vertex shader loads from currently active buffer (vertices)
 	const int nVectorDimension = 2;
 	const int nVectorStride = 0;
 	glVertexAttribPointer( //Targets float data input to vertex shader. use 'L' for double
 		vPosition, //layout number
-		nVectorDimension,
+		nVectorDimension, //as it is packed in the buffer.
 		GL_FLOAT, //buffer type (converted from this type to foat)
 		GL_FALSE, //normalize?
 		nVectorStride,
@@ -70,9 +64,9 @@ void DisplayTriangles(
 	GLuint i_hArrayBuffer,
 	GLuint i_hVertexArrayObject,
 	GLuint i_nTriangleCount,
-	const GLfloat * i_vertices) //%type here may vary by vertexattribute
+	const GLfloat * i_vertices) //%Type here may vary by vertexattribute
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT); //%Should probably be moved to beginning of draw sequence
 
 	//set array buffer as active, copy 'vertices' into buffer
 	glBindBuffer(GL_ARRAY_BUFFER, i_hArrayBuffer);
@@ -80,7 +74,7 @@ void DisplayTriangles(
 
 	unsigned int nVertexCount = 3U * i_nTriangleCount;
 	unsigned int nComponentCount = 2U * nVertexCount;
-	glBufferData(
+	glBufferData( //%don't do this every time
 		GL_ARRAY_BUFFER, 
 		sizeof(*i_vertices) * nComponentCount, 
 		i_vertices, 
@@ -90,7 +84,7 @@ void DisplayTriangles(
 		0, //Start index
 		nComponentCount); //%last argument should be i_nTriangleCount?
 
-	glFlush(); //%not sure what would happen if this were removed.
+	glFlush(); //%not sure what would happen if this were removed. move to end of sequence
 }
 
 void DrawPhysicalObject( //%member of physical object?
@@ -98,11 +92,6 @@ void DrawPhysicalObject( //%member of physical object?
 	GLuint i_hVertexArrayObject,
 	const PhysicalObject & i_oObject)
 {
-	//Call display triangles after extracting the raw triangle data pointer, and triangle count
-	//Its not clear (to me) that the buffer object can be reused like this.
-	//Vertex array object should be fine, so long as the format of the buffer hasn't changed.
-	//Layout within a buffer could have alignment issues if using float on 64-bit system. Use nonzero stride to solve.
-	
 	//%declare a variable in shader qualified by 'uniform'
 	//%I believe all shaders in a linked program have a common namespace
 	//To load a value in, we must request its location from its lexical name. 
