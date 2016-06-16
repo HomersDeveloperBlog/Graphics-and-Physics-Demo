@@ -110,6 +110,18 @@ void DrawPhysicalObject( //%member of physical object?
 	//%might work anyway, if regular v.a.p. function is called, double is automatically downconverted to float.
 	//%see vertex specification section.
 	
+	//%view matrix rows consist of view frame bases.
+	//%Multiplication by R^T gives camera basis coordinates from world.
+	// https://en.wikipedia.org/wiki/Camera_matrix
+	//Translate by -r, rotate by R^t.
+	//Rotation matrix is mat4= (R, 0), (0, 1).
+	//Translation is mat4 = (0, -r), (0, 1)
+	//Homogenous matrices are combined to form projection.
+	//Viewing still requires scaling onto normalized device coordinates.
+	//Doing so implies clipping outside [-1,1]^2, and amounts to a zoom. 
+	//Off-centre perspective transformation is p229 ogl programming guide.
+	//Combine homogenous coordinate matrices Perspective*View
+	
 	assert(!(i_oObject.ModelData().size() % 9U));
 	size_t nTriangleCount = i_oObject.ModelData().size() / 9U;
 	
