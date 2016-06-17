@@ -10,7 +10,7 @@
 #include "GL\freeglut.h"
 
 #include "ShaderText.h"
-#include "ShaderBuild.h"
+#include "GLSLBuild.h"
 
 //For glDebugMessageCallback, see:
 //See https://blog.nobel-joergensen.com/2013/02/17/debugging-opengl-part-2-using-gldebugmessagecallback/

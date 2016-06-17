@@ -33,11 +33,11 @@ class OpenGLShaderSource
 {
 public:
     OpenGLShaderSource(const OpenGLShaderFile & oShaderFile);
-    
-private:
-    GLint OpenGLShaderSource::ConvertInternalShaderEnumToOGL(
-	    ShaderType i_eShaderType);
 
+    static GLint ConvertInternalShaderEnumToOGL(
+	    ShaderType i_eShaderType);
+        
+private:
     GLint m_glnShaderType;
     std::string m_strShaderSource;
 };
@@ -47,7 +47,7 @@ class OpenGLProgramSource
 public:
     OpenGLProgramSource(const OpenGLProgramManifest & i_oManifest)
     
-    OpenGLProgram OpenGLProgramSource::BuildProgramFromSource();
+    OpenGLProgram BuildProgramFromSource();
     
 private:
     std::vector<OpenGLShaderFile> m_vectShaderSources;

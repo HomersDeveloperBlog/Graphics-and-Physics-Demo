@@ -1,5 +1,5 @@
+#include "GLSLBuild.h"
 #include "Program.h"
-#include "ShaderBuild.h"
 
 #define OGL_INVALID_PROGRAM_HANDLE static_cast<GLint>(0)
 

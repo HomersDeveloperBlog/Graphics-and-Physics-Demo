@@ -38,11 +38,6 @@ OpenGLBuffer::OpenGLBuffer(
         throw;
 }
     
-GLint OpenGLBuffer::RawHandle() const 
-{
-    return *m_pglnBufferHandle;
-}
-    
 void OpenGLBuffer::Bind() const
 {
     glBindBuffer(
