@@ -132,7 +132,7 @@ OpenGLProgramSource::OpenGLProgramSource(
 }
 
 //Succeeds and builds a program you can use, or throws an exception.
-OpenGLProgram OpenGLProgramSource::BuildProgramFromSource()
+OpenGLProgram OpenGLProgramSource::BuildProgram()
 {
 	//Create program
 	OpenGLProgram oProgram;

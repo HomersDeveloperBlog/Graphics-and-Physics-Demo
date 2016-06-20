@@ -8,6 +8,7 @@ public:
     GLint RawHandle() const {return *m_pglnBufferHandle;}
     
     void Bind() const;
+    size_t Size() const;
     
 private:
     shared_ptr<GLint> m_pglnBufferHandle;

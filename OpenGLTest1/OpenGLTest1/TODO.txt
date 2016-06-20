@@ -1,7 +1,6 @@
 TODO:
 Refactor physics, graphics (3D data, currently 2D).
-Render onto screen space using CPU code.
-The same thing with OGL uniforms.
+Complete transformation pipeline.
 
 Later:
 A way to apply forces/torques to the object. Reduces to force-contact point.
@@ -10,8 +9,7 @@ Graphics: Textures. Lighting. Shadows.
 Physics: Something interesting.
 Interactivity: Trackball rotation
 
-Eventually:
-Shader compilation code is pretty bad. Loading from file would be nice.
+Maybe eventually:
 Connecting the mesh input to some 3D object database.
 Accurate convex hull computations from display mesh. (boost::geometry)
 Accurate inertia computations from convex hull. (Some published formula)

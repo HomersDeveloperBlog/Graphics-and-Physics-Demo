@@ -13,24 +13,24 @@
 
 using namespace std;
 
-//Arrays for integer handles to opengl objects
-enum Attrib_IDs { vPosition = 0 }; //An enum for the variable names/indices of the vertex shader.
-
 void InitializeOpenGLEnvironment()
 {
 	//Initialize OpenGL Utility (set basic settings, create a window)
 	int nArgc = 0; char ** astrArgv = 0;
 	glutInit(&nArgc, astrArgv);
-	glutInitDisplayMode(GLUT_RGBA);
+	glutInitDisplayMode(GLUT_RGBA); //%and this
 	glutInitWindowSize(512, 512); //%can this go at the end before the window name?
 	glutInitContextVersion(2, 0);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	glutCreateWindow("Physics and OpenGL Demo");
 
-	//Initialize OpenGL Extension Wrangler (link opengl functions)
+	//Initialize OpenGL Extension Wrangler (import opengl functions)
 	if (glewInit())
 		throw;
 }
+
+//Arrays for integer handles to opengl objects
+enum Attrib_IDs { vPosition = 0 }; //An enum for the variable names/indices of the vertex shader.
 
 tuple<GLuint, GLuint> SetupShaderIO()
 {
@@ -101,7 +101,7 @@ void DrawPhysicalObject( //%member of physical object?
 	// void glUniform{1234}{fdi ui}(GLint location, TYPE value);
 	// void glUniform{1234}{fdi ui}v(GLint location, GLsizei count, const TYPE * values);
 	// void glUniformMatrix{234}{fd}v(GLint location, GLsizei count, GLboolean transpose, const GLfloat * values);
-	//Tranpose should be true for C-like arrays. GLSL is column major iternall, C is row major.
+	//Transpose should be true for C-like arrays. GLSL is column major internal, C is row major.
 	//The count allows for the possibility of many such matrices, stored serially.
 	
 	//%types should probably be converted to GL_FLOAT
@@ -120,7 +120,7 @@ void DrawPhysicalObject( //%member of physical object?
 	//Viewing still requires scaling onto normalized device coordinates.
 	//Doing so implies clipping outside [-1,1]^2, and amounts to a zoom. 
 	//Off-centre perspective transformation is p229 ogl programming guide.
-	//Combine homogenous coordinate matrices Perspective*View
+	//Combine homogenous coordinate matrices Projection * View * Model
 	
 	assert(!(i_oObject.ModelData().size() % 9U));
 	size_t nTriangleCount = i_oObject.ModelData().size() / 9U;
@@ -132,9 +132,9 @@ void DrawPhysicalObject( //%member of physical object?
 		i_oObject.ModelData().data());
 }
 
-class SceneGraph
+class Scene
 {
-	//SceneGraph() = default;
+	//Scene()	{}
 	
 	//We won't try to separate objects that require physics and objects that require drawing. 
 	//We also won't try to determine what does and does not need drawing.
@@ -148,25 +148,89 @@ class SceneGraph
 	{
 		//Compute forces
 		
-		//Step states
+		//Step states forward
 		for(PhysicalObject * pObject : vectObjects)
 		{
 			pObject->AdvanceState(i_dT);
 		}
 	}
 	
-	void DrawScene()
+	void DrawAll()
 	{
+		//Clear
+		glClear(GL_COLOR_BUFFER_BIT);
+		if(GetOpenGLError(__FILE__, __LINE__))
+			throw;
+		
+		//Set world to view (camera) matrix.
+		// GLfloat afView[16];
+		// oCamera.GetGLViewMatrix(afView);
+		
+		GLint glnLocation = glGetUniformLocation(
+			oProgram.RawHandle(), //%we don't have this
+			"matViewMatrix");
+		assert(glnLocation > 0);
+		if(GetOpenGLError(__FILE__, __LINE__)
+			|| glnLocation <= 0)
+			throw;
+		
+		glUniformMatrix4fv(
+			glnLocation,
+			1, //one matrix
+			GL_TRUE, //yes transpose. c and glsl are opposite.
+			m_afView); //%has no value.
+		if(GetOpenGLError(__FILE__, __LINE__))
+			throw;
+			
 		//Draw objects
 		for(PhysicalObject * pObject : vectObjects)
 		{
-			//pObject->Draw();
+			//Set model to world matrix.
+			GLfloat afModelToWorldMatrix[16];
+			pObject->EvalModelToWorldMatrix(afModelToWorldMatrix);
+					
+			GLint glnLocation2 = glGetUniformLocation(
+				oProgram.RawHandle(), //%we don't have this
+				"matModelToWorldMatrix");
+			assert(glnLocation2 > 0);
+			if(GetOpenGLError(__FILE__, __LINE__)
+				|| glnLocation2 <= 0)
+				throw;
+			
+			glUniformMatrix4fv(
+				glnLocation2,
+				1, //one matrix
+				GL_TRUE, //yes transpose
+				afModelToWorldMatrix);
+			if(GetOpenGLError(__FILE__, __LINE__))
+				throw;
+			
+			//Get model buffer. Query buffer size. Bind it.
+			size_t nBufferSize = pObject->ModelBuffer().Size();
+			GLint glnBufferSize = static_cast<GLint>(nBufferSize);
+			assert(glnBufferSize > 0);
+			
+			pObject->ModelBuffer().Bind();
+			
+			//Issue draw call.
+			glDrawArrays(
+				GL_TRIANGLES,
+				0,
+				glnBufferSize);
+			if(GetOpenGLError(__FILE__, __LINE__))
+				throw;
+			
+			//Flush
+			glFlush();
+			if(GetOpenGLError(__FILE__, __LINE__))
+				throw;
 		}
 	}
 	
 protected:
 	vector<PhysicalObject *> vectObjects; //%not a raw pointer
-	//Active opengl objects?
+	GLfloat m_afCamera[16];
+	//map modelID -> buffer. For now we set buffers directly in main.
 };
 
 void GameUpdateLoop()

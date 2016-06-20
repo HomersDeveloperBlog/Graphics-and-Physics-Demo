@@ -46,3 +46,18 @@ void OpenGLBuffer::Bind() const
     if(GetOpenGLError(__FILE__, __LINE__))
         throw;
 }
+
+size_t Size() const
+{
+    GLint nAPIReturn = -1;
+    glGetNamedBufferParameteriv(
+        *m_pglnBufferHandle,
+        GL_BUFFER_SIZE,
+        &nAPIReturn);
+    assert(nAPIReturn >= 0);
+    if(GetOpenGLError(__FILE__, __LINE__)
+        || nAPIReturn < 0)
+        throw;
+    
+    return static_cast<size_t>(nAPIReturn);
+}
