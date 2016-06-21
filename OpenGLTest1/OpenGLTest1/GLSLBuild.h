@@ -49,7 +49,7 @@ class OpenGLProgramSource
 public:
     OpenGLProgramSource(const OpenGLProgramManifest & i_oManifest)
     
-    OpenGLProgram BuildProgramFromSource();
+    OpenGLProgram BuildProgram();
     
 private:
     std::vector<OpenGLShaderFile> m_vectShaderSources;

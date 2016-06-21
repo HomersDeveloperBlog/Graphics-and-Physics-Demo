@@ -47,7 +47,7 @@ void OpenGLBuffer::Bind() const
         throw;
 }
 
-size_t Size() const
+size_t OpenGLBuffer::Size() const
 {
     GLint nAPIReturn = -1;
     glGetNamedBufferParameteriv(
