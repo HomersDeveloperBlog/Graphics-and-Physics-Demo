@@ -1,15 +1,15 @@
+#include "Physics.h"
+
 class PhysicalObject
 {
 public:
 	PhysicalObject(
-		const double i_dMass,
-		const c_matrix<double, 3U, 3U> & i_aadInertia,
-		const c_vector<double, 3U> & i_adPosition,
-		const c_vector<double, 3U> & i_adVelocity,
-		const c_matrix<double, 3U, 3U> & i_adAngularPosition,
-		const c_vector<double, 3U> & i_adAngularVelocity)
-		: m_oIntrinsicState(i_dMass, i_aadInertia),
-		m_oExtrinsicState(i_adPosition, i_adVelocity, i_adAngularPosition, i_adAngularVelocity)
+		const Model & i_oModel,
+		const PhysicalIntrinsicState & i_oIntrinsicState,
+		const PhysicalExtrinsicState & i_oExtrinsicState)
+		: m_oIntrinsicState(i_oIntrinsicState),
+		m_oExtrinsicState(i_oExtrinsicState),
+		m_oModel(i_oModel)
 	{
 		assert(CheckState());
 	}
@@ -19,6 +19,8 @@ public:
 		return m_oIntrinsicState.CheckState() 
 			&& m_oExtrinsicState.CheckState();
 	}
+
+	const Model & Model() const {return m_oMesh;}
 
 	//%should pass this job to physics object.
 	void AdvanceState(const double i_dDT)
@@ -46,24 +48,19 @@ public:
 	{
 		//Matrix is angular position matrix * initial scaling matrix
 		c_matrix<double, 3U, 3U> aadModelToWorld = 
-			m_oExtrinsicState.m_adAngularPosition * m_oMesh.m_aadScaling;
+			m_oExtrinsicState.AngularPosition() * m_oMesh.ScalingMatrix();
 		
 		//May have to assemble into some wierd 4x4
 		//Which may need to be converted to OGL compatible format
 		
-		return make_tuple(
-			m_oExtrinsicState.m_adPosition,
+		return std::make_tuple(
+			m_oExtrinsicState.Position(),
 			aadModelToWorld);
-	}
-	
-	const OpenGLBuffer & ModelBuffer() const
-	{
-		return m_oMesh.Buffer();
 	}
 	
 protected:
 	PhysicalIntrinsicState m_oIntrinsicState; //mechanical decorator
 	PhysicalExtrinsicState m_oExtrinsicState; //position + orientation. also needed for display/collision.
-	//ConvexPolyhedron m_oConvexPolyhedron; //collision geometry. also world space
 	Model m_oMesh; //display geometry.
+	//ConvexPolyhedron m_oConvexPolyhedron; //collision geometry. also world space
 };

@@ -1,7 +1,10 @@
 //%For now we only need one and we will bind it at the start of the program.
 
+#include "GLBase.h"
+
 class OpenGLVertexArrayObject
 {
+public:
     OpenGLVertexArrayObject();
     
     GLint RawHandle() const {return *m_pglnVAOHandle;}

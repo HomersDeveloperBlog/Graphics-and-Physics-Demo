@@ -3,14 +3,13 @@
 #include <string>
 #include <memory>
 
-#include "GL\glew.h" //%only typedefs are needed
-#include "GL\wglew.h"
-#include "GL\freeglut.h"
+#include "GLBase.h"
 
 #include "Shader.h"
 
 class OpenGLProgram
 {
+public:
     OpenGLProgram();
     
     GLint RawHandle() const {return *m_pglnProgramHandle;}
@@ -19,10 +18,11 @@ class OpenGLProgram
     void DetachShader(const OpenGLShader & i_oShader);
     bool GetLinkStatus() const;
     bool Link();
-    string GetLinkerMessage() const;
+    std::string GetLinkerMessage() const;
     void Use() const;
     void DetachAll();
-    
+	GLuint GetAttributeLocation(std::string & i_strName);
+
 private:
-    shared_ptr<GLint> m_pglnProgramHandle;
+    std::shared_ptr<GLint> m_pglnProgramHandle; //%actually a GLuint, is a GLint on return to check correctness only.
 };

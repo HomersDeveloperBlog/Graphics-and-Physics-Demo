@@ -1,14 +1,32 @@
 #include "stdafx.h"
+
 #include "assert.h"
 #include <tuple>
 
-#include "GL\glew.h"
-#include "GL\wglew.h"
-#include "GL\freeglut.h"
-
+#include "GLBase.h"
+#include "Meshes.h"
 #include "Physics.h"
 #include "GLSLBuild.h"
+#include "VertexArrayObject.h"
 #include "DrawScene.h"
+
+using namespace std;
+
+void InitializeOpenGLEnvironment()
+{
+	//Initialize OpenGL Utility (set basic settings, create a window)
+	int nArgc = 0; char ** astrArgv = 0;
+	glutInit(&nArgc, astrArgv);
+	glutInitDisplayMode(GLUT_RGBA); //%and this
+	glutInitWindowSize(512, 512); //%can this go at the end before the window name?
+	glutInitContextVersion(2, 0);
+	glutInitContextProfile(GLUT_CORE_PROFILE);
+	glutCreateWindow("Physics and OpenGL Demo");
+
+	//Initialize OpenGL Extension Wrangler (import opengl functions)
+	if (glewInit())
+		throw;
+}
 
 int main(
 	int argc, 
@@ -30,19 +48,41 @@ int main(
 	OpenGLProgram oProgram = oProgramSource.BuildProgram();
 	
 	//Set vertex attributes.
-	OpenGLVertexArrayObject m_oVAO;
-	m_oVAO.Bind();
+	OpenGLVertexArrayObject oVAO;
+	oVAO.Bind();
+
+	GLuint glnLayoutNumber = oProgram.GetAttributeLocation(
+		"vPosition");
+	oVAO.DefineAttributeSourceFormat(
+		glnLayoutNumber,
+		2, 0); //%this information should come from somewhere
+
+	//Load assets
+	Model oModel(
+		OpenGLBuffer(
+			anMeshByteCount[SQUARE_MESH_2D],
+			apMeshes[SQUARE_MESH_2D]),
+		identity_matrix<double>(3U));
+
+	//Create objects
+	PhysicalObject oPendulum(
+		oModel,
+		PhysicalIntrinsicState(
+			4.0, //mass
+			identity_matrix<double>(3U)), //inertia
+		PhysicalExtrinsicState(
+			zero_vector<double>(3U), //position
+			0.01f * unit_vector<double>(3U, 0U), //velocity
+			identity_matrix<double>(3U), //angular position
+			zero_vector<double>(3U))); //angular velocity
 	
-	//Load assets.
-	
-	//CompileShaders();
-	
-	//Create scene, populate objects.
-	
-	GameUpdateLoop(); //%input a scene
+	//Create scene, enter update loop
+	Scene oScene;
+	oScene.AddObject(oPendulum);
+	GameUpdateLoop(oScene); //%shove into scene.
 	
 	//glutDisplayFunc(UpdateDisplay);
-	glutMainLoop();
+	//glutMainLoop();
 
 	return 0;
 }

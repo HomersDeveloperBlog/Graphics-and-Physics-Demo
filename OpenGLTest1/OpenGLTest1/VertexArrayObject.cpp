@@ -1,3 +1,6 @@
+#include "stdafx.h"
+#include "VertexArrayObject.h"
+
 OpenGLVertexArrayObject::OpenGLVertexArrayObject()
 {
     GLuint glnVAOHandle;
@@ -39,15 +42,15 @@ void OpenGLVertexArrayObject::DefineAttributeSourceFormat(
     glBindVertexArray(*m_pglnVAOHandle);
     if(GetOpenGLError(__FILE__, __LINE__))
         throw;
-
+	
     //Define format
     glVertexAttribPointer(
-        i_nIndex, //layout number
-        i_nVectorDimension, //as it is packed in the buffer.
+        static_cast<GLuint>(i_nIndex), //layout number
+        static_cast<GLint>(i_nVectorDimension), //as it is packed in the buffer.
         GL_FLOAT, //buffer type (converted from this type to foat)
         GL_FALSE, //normalize?
-        i_nStride,
-        (void*)(0)); //offset from start of bound GL_ARRAY_BUFFER
+        static_cast<GLSizei>(i_nStride),
+        static_cast<GLvoid *>(nullptr)); //offset from start of bound GL_ARRAY_BUFFER
     if(GetOpenGLError(__FILE__, __LINE__))
         throw;
     

@@ -1,10 +1,13 @@
+#include "stdafx.h"
+#include "assert.h"
+
 #include "GLSLBuild.h"
 #include "Shader.h"
 
 #define OGL_INVALID_SHADER_HANDLE static_cast<GLint>(0)
 
 OpenGLShader::OpenGLShader(
-    const OpenGLShaderSource & i_oShaderSource) //%unname struct?
+    const OpenGLShaderSource & i_oShaderSource) 
 {
     //Create shader object
     GLuint glnShaderHandle = glCreateShader(

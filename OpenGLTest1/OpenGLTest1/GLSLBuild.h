@@ -5,12 +5,10 @@
 #include <vector>
 #include <string>
 
+#include "GLBase.h"
 #include "Program.h"
 
-bool GetOpenGLError( //%relocate?
-	const string & i_strFileName,
-	int nLineNumber);
-    
+
 //%deprecated
 void CompileShaders();
 
@@ -31,23 +29,23 @@ struct OpenGLProgramManifest
     std::vector<OpenGLShaderFile> m_vectShaderFiles;
 };
 
+class OpenGLShaderSource
+{
+public:
+    OpenGLShaderSource(const OpenGLShaderFile & oShaderFile);
+
+    static GLint ConvertInternalShaderEnumToOGL(
+        ShaderType i_eShaderType);
+            
+private:
+    GLint m_glnShaderType;
+    std::string m_strShaderSource;
+};
+
 class OpenGLProgramSource
 {
-    class OpenGLShaderSource
-    {
-    public:
-        OpenGLShaderSource(const OpenGLShaderFile & oShaderFile);
-
-        static GLint ConvertInternalShaderEnumToOGL(
-            ShaderType i_eShaderType);
-            
-    private:
-        GLint m_glnShaderType;
-        std::string m_strShaderSource;
-    };
-    
 public:
-    OpenGLProgramSource(const OpenGLProgramManifest & i_oManifest)
+    OpenGLProgramSource(const OpenGLProgramManifest & i_oManifest);
     
     OpenGLProgram BuildProgram();
     

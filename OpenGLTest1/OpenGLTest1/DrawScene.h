@@ -1,15 +1,9 @@
 #pragma once
 
-#include <tuple>
+//void DisplayTriangles( //%export necessary?
+//	GLuint hArrayBuffer,
+//	GLuint hVertexArrayObject,
+//	GLuint i_nTriangleCount,
+//	const GLfloat * i_aafTriangles);
 
-void InitializeOpenGLEnvironment();
-
-std::tuple<GLuint, GLuint> SetupShaderIO(); //%export necessary?
-
-void DisplayTriangles( //%export necessary?
-	GLuint hArrayBuffer,
-	GLuint hVertexArrayObject,
-	GLuint i_nTriangleCount,
-	const GLfloat * i_aafTriangles);
-
-void GameUpdateLoop(); //%surely, this function has some inputs
+void GameUpdateLoop(const Scene & i_oScene);

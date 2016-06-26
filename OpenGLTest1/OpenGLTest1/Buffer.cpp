@@ -1,21 +1,32 @@
+#include "stdafx.h"
+#include "assert.h"
+
+#include "Buffer.h"
+
+using namespace std;
+
 OpenGLBuffer::OpenGLBuffer(
     size_t i_nSize, //In bytes
     const void * i_pData)
 {
     //Create buffer object
-    GLuint glnBufferHandle;
-    glGenBuffers(1, glnBufferHandle);
+    GLuint glnBufferHandle = -1;
+    glGenBuffers(
+		static_cast<GLsizei>(1),
+		&glnBufferHandle);
     if(GetOpenGLError(__FILE__, __LINE__))
     {
         assert(!glIsBuffer(glnBufferHandle));
         throw;
     }
     
-    m_pglnBufferHandle = shared_ptr<GLint>(
-        new GLint(glnBufferHandle), //%could throw. would leak handle.
-        [](GLint * i_pglnBufferHandle)
+    m_pglnBufferHandle = shared_ptr<GLuint>(
+        new GLuint(glnBufferHandle), //%could throw. would leak handle.
+        [](GLuint * i_pglnBufferHandle)
         {
-            glDeleteBuffers(1, i_pglnBufferHandle);
+            glDeleteBuffers(
+				static_cast<GLsizei>(1),
+				i_pglnBufferHandle);
             assert(!GetOpenGLError(__FILE__, __LINE__));
             
             delete i_pglnBufferHandle;

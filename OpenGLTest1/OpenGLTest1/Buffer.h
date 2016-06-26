@@ -1,17 +1,21 @@
 #pragma once
 
+#include <memory>
+
+#include "GLBase.h"
+
 class OpenGLBuffer
 {
 public:
     OpenGLBuffer(size_t i_nSize, const void * i_pData);
     
-    GLint RawHandle() const {return *m_pglnBufferHandle;}
+    GLuint RawHandle() const {return *m_pglnBufferHandle;}
     
     void Bind() const;
     size_t Size() const;
     
 private:
-    shared_ptr<GLint> m_pglnBufferHandle;
+    std::shared_ptr<GLuint> m_pglnBufferHandle;
 };
 
 //%In order to be scalable, we need multiple model instances reusing the buffer slot.

@@ -1,6 +1,9 @@
 TODO:
-Refactor physics, graphics (3D data, currently 2D).
-Complete transformation pipeline.
+Refactor physics. graphics need 3D double data, currently 2D float.
+Scene needs camera. Uniform locations stored in scene.
+View / Projection matrix creation code. GL mat4 conversion.
+New shader code with transformation uniforms.
+Physics code with proper odeint type requirements fulfilled.
 
 Later:
 A way to apply forces/torques to the object. Reduces to force-contact point.
@@ -10,6 +13,7 @@ Physics: Something interesting.
 Interactivity: Trackball rotation
 
 Maybe eventually:
+Refactor include structure.
 Connecting the mesh input to some 3D object database.
 Accurate convex hull computations from display mesh. (boost::geometry)
 Accurate inertia computations from convex hull. (Some published formula)

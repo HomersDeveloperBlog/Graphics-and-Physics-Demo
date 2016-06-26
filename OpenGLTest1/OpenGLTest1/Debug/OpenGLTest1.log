@@ -1,45 +1,495 @@
 ﻿  main.cpp
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\meshes.h(10): warning C4838: conversion from 'double' to 'const float' requires a narrowing conversion
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\meshes.h(10): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\meshes.h(17): warning C4838: conversion from 'double' to 'const float' requires a narrowing conversion
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\meshes.h(17): warning C4305: 'initializing': truncation from 'double' to 'const float'
 c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(72): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
 c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(104): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-  Physics.cpp
-c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(72): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(104): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory(349): warning C4996: 'std::_Uninitialized_copy0': Function call with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory(336): note: see declaration of 'std::_Uninitialized_copy0'
-  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\storage.hpp(94): note: see reference to function template instantiation '_FwdIt std::uninitialized_copy<const double*,double*>(_InIt,_InIt,_FwdIt)' being compiled
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3940): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: 'E1=boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: 'T2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E2> &' from 'const boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3417): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: 'T1=boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: 'E2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,vector_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::vector_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1484): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,vector_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::vector_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E2> &' from 'const boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1241): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(const std::complex<_Other> &,I)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(119): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(I,const std::complex<_Other> &)': could not deduce template argument for 'const std::complex<_Other> &' from 'const boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(109): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2676: binary '*': 'boost::numeric::ublas::c_matrix<double,3,3>' does not define this operator or a conversion to a type acceptable to the predefined operator
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E> &' from 'boost::numeric::ublas::matrix_unary2<E,F>'
           with
           [
-              _FwdIt=double *,
-              _InIt=const double *
+              E=boost::numeric::ublas::c_matrix<double,3,3>,
+              F=boost::numeric::ublas::scalar_identity<double>
           ]
-  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\storage.hpp(89): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3940): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: 'E1=boost::numeric::ublas::matrix_unary2<E,F>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: 'T2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E2> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3417): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: 'T1=boost::numeric::ublas::matrix_unary2<E,F>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: 'E2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,vector_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::vector_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E> &' from 'boost::numeric::ublas::matrix_unary2<E,F>'
           with
           [
-              T=double
+              E=boost::numeric::ublas::c_matrix<double,3,3>,
+              F=boost::numeric::ublas::scalar_identity<double>
           ]
-  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector.hpp(120): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1484): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,vector_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::vector_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E2> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1241): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(const std::complex<_Other> &,I)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::matrix_unary2<E,F>'
           with
           [
-              T=double
+              E=boost::numeric::ublas::c_matrix<double,3,3>,
+              F=boost::numeric::ublas::scalar_identity<double>
           ]
-  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix.hpp(102): note: see reference to class template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>' being compiled
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(119): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(I,const std::complex<_Other> &)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(109): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2676: binary '*': 'boost::numeric::ublas::matrix_unary2<E,F>' does not define this operator or a conversion to a type acceptable to the predefined operator
           with
           [
-              T=double
+              E=boost::numeric::ublas::c_matrix<double,3,3>,
+              F=boost::numeric::ublas::scalar_identity<double>
           ]
-  c:\users\jordan\documents\visual studio 2013\projects\opengltest1\opengltest1\physics.cpp(8): note: see reference to class template instantiation 'boost::numeric::ublas::matrix<double,boost::numeric::ublas::row_major,boost::numeric::ublas::unbounded_array<T,std::allocator<T>>>' being compiled
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3940): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: 'E1=boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: 'T2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E2> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3417): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: 'T1=boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: 'E2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,vector_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::vector_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1484): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,vector_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::vector_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E2> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1241): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(const std::complex<_Other> &,I)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(119): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(I,const std::complex<_Other> &)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(109): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2676: binary '*': 'boost::numeric::ublas::c_matrix<double,3,3>' does not define this operator or a conversion to a type acceptable to the predefined operator
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(177): error C3861: 'inverse': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(15): error C2143: syntax error: missing ',' before '&'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.h(19): error C2143: syntax error: missing ';' before '<'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.h(19): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.h(19): error C2238: unexpected token(s) preceding ';'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.h(10): error C2065: 'm_pglnVAOHandle': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.h(9): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.h(9): error C2143: syntax error: missing ',' before '&'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(42): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'OpenGLShaderFile'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(42): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(45): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'OpenGLShaderFile'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(45): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(55): error C2664: 'GLuint OpenGLProgram::GetAttributeLocation(std::string &)': cannot convert argument 1 from 'const char [10]' to 'std::string &'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(61): error C2065: 'Model': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(61): error C2146: syntax error: missing ';' before identifier 'oModel'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(62): error C3861: 'OpenGLBuffer': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(61): error C3861: 'oModel': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(68): error C2065: 'PhysicalObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(68): error C2146: syntax error: missing ';' before identifier 'oPendulum'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(69): error C2065: 'oModel': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(68): error C3861: 'oPendulum': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(80): error C2065: 'Scene': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(80): error C2146: syntax error: missing ';' before identifier 'oScene'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(80): error C2065: 'oScene': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(81): error C2065: 'oScene': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(81): error C2228: left of '.AddObject' must have class/struct/union
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(81): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(81): error C2065: 'oPendulum': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\main.cpp(82): error C2065: 'oScene': undeclared identifier
+  VertexArrayObject.cpp
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.h(19): error C2143: syntax error: missing ';' before '<'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.h(19): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.h(19): error C2238: unexpected token(s) preceding ';'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.h(10): error C2065: 'm_pglnVAOHandle': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(7): error C2664: 'void (GLsizei,GLuint *)': cannot convert argument 2 from 'GLuint' to 'GLuint *'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(7): note: Conversion from integral type to pointer type requires reinterpret_cast, C-style cast or function-style cast
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(10): error C3861: 'assert': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(14): error C2065: 'm_pglnVAOHandle': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(14): error C2065: 'shared_ptr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(14): error C2275: 'GLint': illegal use of this type as an expression
+  c:\program files\glew-1.11.0-win32\glew-1.11.0\include\gl\glew.h(277): note: see declaration of 'GLint'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(18): error C2664: 'void (GLsizei,const GLuint *)': cannot convert argument 2 from 'GLint *' to 'const GLuint *'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(18): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(19): error C3861: 'assert': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(27): error C2065: 'm_pglnVAOHandle': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(38): error C3861: 'assert': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(39): error C3861: 'assert': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(42): error C2065: 'm_pglnVAOHandle': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(52): error C2061: syntax error: identifier 'GLSizei'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\vertexarrayobject.cpp(59): error C2065: 'm_pglnVAOHandle': undeclared identifier
+  Shader.cpp
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(15): error C2143: syntax error: missing ',' before '&'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(11): error C2511: 'OpenGLShader::OpenGLShader(const OpenGLShaderSource &)': overloaded member function not found in 'OpenGLShader'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(13): note: see declaration of 'OpenGLShader'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(14): error C2248: 'OpenGLShaderSource::m_glnShaderType': cannot access private member declared in class 'OpenGLShaderSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(41): note: see declaration of 'OpenGLShaderSource::m_glnShaderType'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(33): note: see declaration of 'OpenGLShaderSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(25): error C2065: 'shared_ptr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(25): error C2275: 'GLint': illegal use of this type as an expression
+  c:\program files\glew-1.11.0-win32\glew-1.11.0\include\gl\glew.h(277): note: see declaration of 'GLint'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(38): error C2597: illegal reference to non-static member 'OpenGLShader::m_pglnShaderHandle'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(40): error C2248: 'OpenGLShaderSource::m_strShaderSource': cannot access private member declared in class 'OpenGLShaderSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(42): note: see declaration of 'OpenGLShaderSource::m_strShaderSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(33): note: see declaration of 'OpenGLShaderSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(41): error C2664: 'void (GLuint,GLsizei,const GLchar *const *,const GLint *)': cannot convert argument 3 from 'const char *' to 'const GLchar *const *'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(41): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(48): error C2511: 'bool OpenGLShader::GetCompileStatus(void)': overloaded member function not found in 'OpenGLShader'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(13): note: see declaration of 'OpenGLShader'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(51): error C2597: illegal reference to non-static member 'OpenGLShader::m_pglnShaderHandle'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(70): error C2143: syntax error: missing ';' before 'OpenGLShader::GetCompilerMessage'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(70): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(71): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(71): error C2511: 'int OpenGLShader::GetCompilerMessage(void)': overloaded member function not found in 'OpenGLShader'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(13): note: see declaration of 'OpenGLShader'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(74): error C2597: illegal reference to non-static member 'OpenGLShader::m_pglnShaderHandle'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(83): error C2065: 'shared_ptr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(83): error C2062: type 'char' unexpected
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(86): error C2143: syntax error: missing ';' before '{'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(87): error C2065: 'i_pBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(87): error C2541: 'delete': cannot delete objects that are not pointers
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(88): error C2059: syntax error: ')'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(92): error C2597: illegal reference to non-static member 'OpenGLShader::m_pglnShaderHandle'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(95): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(100): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(103): error C2064: term does not evaluate to a function taking 1 arguments
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(113): error C2248: 'OpenGLShaderSource::m_glnShaderType': cannot access private member declared in class 'OpenGLShaderSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(41): note: see declaration of 'OpenGLShaderSource::m_glnShaderType'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(33): note: see declaration of 'OpenGLShaderSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(126): error C2248: 'OpenGLShaderSource::m_strShaderSource': cannot access private member declared in class 'OpenGLShaderSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(42): note: see declaration of 'OpenGLShaderSource::m_strShaderSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(33): note: see declaration of 'OpenGLShaderSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(127): error C2664: 'void (GLuint,GLsizei,const GLchar *const *,const GLint *)': cannot convert argument 3 from 'const char *' to 'const GLchar *const *'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(127): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(169): error C2065: 'shared_ptr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(169): error C2062: type 'char' unexpected
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(171): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(173): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(180): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(185): error C2065: 'cerr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(185): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.cpp(185): error C2065: 'endl': undeclared identifier
+  Scene.cpp
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(1): error C2653: 'Scene': is not a class or namespace name
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(2): error C2143: syntax error: missing ',' before '*'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(4): error C2065: 'vectObjects': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(4): error C2228: left of '.push_back' must have class/struct/union
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(4): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(4): error C2065: 'i_pNewObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(7): error C2653: 'Scene': is not a class or namespace name
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(14): error C2065: 'PhysicalObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(14): error C2065: 'pObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(14): error C2143: syntax error: missing ';' before ':'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(14): error C2065: 'vectObjects': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(14): error C2143: syntax error: missing ';' before ')'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(16): error C2065: 'pObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(16): error C2227: left of '->AdvanceState' must point to class/struct/union/generic type
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(16): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(20): error C2653: 'Scene': is not a class or namespace name
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(23): error C2065: 'GL_COLOR_BUFFER_BIT': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(23): error C3861: 'glClear': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(24): error C3861: 'GetOpenGLError': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(48): error C2065: 'PhysicalObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(48): error C2065: 'pObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(48): error C2143: syntax error: missing ';' before ':'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(48): error C2065: 'vectObjects': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(48): error C2143: syntax error: missing ';' before ')'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(71): error C2065: 'pObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(71): error C2227: left of '->ModelBuffer' must point to class/struct/union/generic type
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(71): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(71): error C2228: left of '.Size' must have class/struct/union
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(72): error C2065: 'GLint': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(72): error C2146: syntax error: missing ';' before identifier 'glnBufferSize'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(72): error C2065: 'glnBufferSize': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(72): error C2061: syntax error: identifier 'GLint'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(73): error C2065: 'glnBufferSize': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(73): error C3861: 'assert': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(75): error C2065: 'pObject': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(75): error C2227: left of '->Model' must point to class/struct/union/generic type
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(75): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(75): error C2228: left of '.Buffer' must have class/struct/union
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(75): error C2228: left of '.Bind' must have class/struct/union
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(79): error C2065: 'GL_TRIANGLES': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(81): error C2065: 'glnBufferSize': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(78): error C3861: 'glDrawArrays': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(82): error C3861: 'GetOpenGLError': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(86): error C3861: 'glFlush': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.cpp(87): error C3861: 'GetOpenGLError': identifier not found
+  Program.cpp
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(15): error C2143: syntax error: missing ',' before '&'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(22): error C2065: 'shared_ptr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(22): error C2275: 'GLint': illegal use of this type as an expression
+  c:\program files\glew-1.11.0-win32\glew-1.11.0\include\gl\glew.h(277): note: see declaration of 'GLint'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(54): error C2511: 'bool OpenGLProgram::GetLinkStatus(void)': overloaded member function not found in 'OpenGLProgram'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.h(11): note: see declaration of 'OpenGLProgram'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(57): error C2597: illegal reference to non-static member 'OpenGLProgram::m_pglnProgramHandle'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(75): error C2143: syntax error: missing ';' before 'OpenGLProgram::GetLinkerMessage'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(75): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(76): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(76): error C2511: 'int OpenGLProgram::GetLinkerMessage(void)': overloaded member function not found in 'OpenGLProgram'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.h(11): note: see declaration of 'OpenGLProgram'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(79): error C2597: illegal reference to non-static member 'OpenGLProgram::m_pglnProgramHandle'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(88): error C2065: 'shared_ptr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(88): error C2062: type 'char' unexpected
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(91): error C2143: syntax error: missing ';' before '{'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(92): error C2065: 'i_pBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(92): error C2541: 'delete': cannot delete objects that are not pointers
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(93): error C2059: syntax error: ')'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(97): error C2597: illegal reference to non-static member 'OpenGLProgram::m_pglnProgramHandle'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(100): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(105): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(108): error C2064: term does not evaluate to a function taking 1 arguments
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(137): error C2065: 'OGL_INVALID_SHADER_HANDLE': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(143): error C2664: 'void (GLuint,GLsizei,GLsizei *,GLuint *)': cannot convert argument 3 from 'GLsizei' to 'GLsizei *'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(143): note: Conversion from integral type to pointer type requires reinterpret_cast, C-style cast or function-style cast
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(167): error C2440: 'static_cast': cannot convert from 'const char *' to 'GLchar *'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(167): note: Conversion loses qualifiers
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(167): error C2198: 'PFNGLGETATTRIBLOCATIONPROC': too few arguments for call
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(170): error C2146: syntax error: missing ')' before identifier 'glnLayoutNumber'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(170): error C2059: syntax error: ')'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(171): error C2143: syntax error: missing ';' before 'throw'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(170): warning C4552: '<': operator has no effect; expected operator with side-effect
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(207): error C2065: 'shared_ptr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(207): error C2062: type 'char' unexpected
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(209): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(211): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(218): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(223): error C2065: 'cerr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(223): error C2065: 'pchInfoLogBuffer': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.cpp(223): error C2065: 'endl': undeclared identifier
+  GLSLBuild.cpp
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\shader.h(15): error C2143: syntax error: missing ',' before '&'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(34): error C3861: 'ReadFileToBuffer': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(41): error C2039: 'm_vectShaders': is not a member of 'OpenGLProgramManifest'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(28): note: see declaration of 'OpenGLProgramManifest'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(44): error C2065: 'oShaderFile': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(45): error C2664: 'void std::vector<OpenGLShaderFile,std::allocator<_Ty>>::push_back(const OpenGLShaderFile &)': cannot convert argument 1 from 'OpenGLShaderSource' to 'OpenGLShaderFile &&'
           with
           [
-              T=double
+              _Ty=OpenGLShaderFile
           ]
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(45): note: Reason: cannot convert from 'OpenGLShaderSource' to 'OpenGLShaderFile'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(45): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(60): error C2664: 'OpenGLShader::OpenGLShader(OpenGLShader &&)': cannot convert argument 1 from 'const OpenGLShaderSource' to 'const int'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(60): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(68): error C2065: 'cerr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(68): error C2065: 'endl': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(72): error C2039: 'Attach': is not a member of 'OpenGLProgram'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\program.h(11): note: see declaration of 'OpenGLProgram'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(76): error C2059: syntax error: ')'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(81): error C2065: 'cerr': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(81): error C2065: 'endl': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(95): error C2512: 'OpenGLProgramSource': no appropriate default constructor available
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(46): note: see declaration of 'OpenGLProgramSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(96): error C2039: 'm_vectShaders': is not a member of 'OpenGLProgramManifest'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(28): note: see declaration of 'OpenGLProgramManifest'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(99): error C2512: 'OpenGLProgramSource': no appropriate default constructor available
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(46): note: see declaration of 'OpenGLProgramSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(100): error C2039: 'm_glnShaderType': is not a member of 'OpenGLProgramSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(46): note: see declaration of 'OpenGLProgramSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(101): error C2065: 'oShaderFile': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(101): error C2228: left of '.m_eShaderTypeInternal' must have class/struct/union
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(101): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(100): error C3861: 'ConvertInternalShaderEnumToOGL': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(102): error C2039: 'm_strShaderSource': is not a member of 'OpenGLProgramSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(46): note: see declaration of 'OpenGLProgramSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(103): error C2065: 'oShaderFile': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(103): error C2228: left of '.m_strShaderFileName' must have class/struct/union
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(103): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(102): error C3861: 'ReadFileToBuffer': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(106): error C2248: 'OpenGLProgramSource::m_vectShaderSources': cannot access private member declared in class 'OpenGLProgramSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(53): note: see declaration of 'OpenGLProgramSource::m_vectShaderSources'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(46): note: see declaration of 'OpenGLProgramSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(106): error C2664: 'void std::vector<OpenGLShaderFile,std::allocator<_Ty>>::push_back(const OpenGLShaderFile &)': cannot convert argument 1 from 'OpenGLProgramSource' to 'OpenGLShaderFile &&'
+          with
+          [
+              _Ty=OpenGLShaderFile
+          ]
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(106): note: Reason: cannot convert from 'OpenGLProgramSource' to 'OpenGLShaderFile'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(106): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(111): error C2065: 'OGL_INVALID_PROGRAM_HANDLE': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(113): error C2065: 'OGL_INVALID_PROGRAM_HANDLE': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(116): error C2065: 'OGL_INVALID_PROGRAM_HANDLE': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(120): error C2065: 'vector': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(120): error C2275: 'GLint': illegal use of this type as an expression
+  c:\program files\glew-1.11.0-win32\glew-1.11.0\include\gl\glew.h(277): note: see declaration of 'GLint'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(120): error C2065: 'vectShaderHandles': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(121): error C2065: 'vectShaderHandles': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(121): error C2228: left of '.reserve' must have class/struct/union
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(121): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(121): error C2039: 'm_vectShaderSoruces': is not a member of 'OpenGLProgramSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(46): note: see declaration of 'OpenGLProgramSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(121): error C2228: left of '.size' must have class/struct/union
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(124): error C2248: 'OpenGLProgramSource::m_vectShaderSources': cannot access private member declared in class 'OpenGLProgramSource'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(53): note: see declaration of 'OpenGLProgramSource::m_vectShaderSources'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.h(46): note: see declaration of 'OpenGLProgramSource'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(128): error C3861: 'CompileShaderFromSource': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(129): error C2065: 'OGL_INVALID_SHADER_HANDLE': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(133): error C2065: 'OGL_INVALID_PROGRAM_HANDLE': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(142): error C2065: 'OGL_INVALID_PROGRAM_HANDLE': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(145): error C2065: 'vectShaderHandles': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(145): error C2228: left of '.push_back' must have class/struct/union
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(145): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(149): error C3861: 'LinkProgram': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(153): error C2065: 'OGL_INVALID_PROGRAM_HANDLE': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(157): error C2065: 'vectShaderHandles': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(159): error C3312: no callable 'begin' function found for type 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(159): error C3312: no callable 'end' function found for type 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(160): error C2065: 'glnShaderHandle': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\glslbuild.cpp(164): error C2065: 'glnShaderHandle': undeclared identifier
   DrawScene.cpp
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.h(12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.h(12): error C2143: syntax error: missing ',' before '*'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.h(17): error C2143: syntax error: missing ';' before '<'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.h(17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\scene.h(17): error C2238: unexpected token(s) preceding ';'
 c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(72): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
 c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\odeint\integrate\max_step_checker.hpp(104): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3940): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: 'E1=boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: 'T2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E2> &' from 'const boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3417): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: 'T1=boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): note: 'E2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,vector_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::vector_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1484): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,vector_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::vector_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E2> &' from 'const boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1241): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(const std::complex<_Other> &,I)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(119): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(I,const std::complex<_Other> &)': could not deduce template argument for 'const std::complex<_Other> &' from 'const boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(109): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(166): error C2676: binary '*': 'boost::numeric::ublas::c_matrix<double,3,3>' does not define this operator or a conversion to a type acceptable to the predefined operator
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E> &' from 'boost::numeric::ublas::matrix_unary2<E,F>'
+          with
+          [
+              E=boost::numeric::ublas::c_matrix<double,3,3>,
+              F=boost::numeric::ublas::scalar_identity<double>
+          ]
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3940): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: 'E1=boost::numeric::ublas::matrix_unary2<E,F>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: 'T2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E2> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3417): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: 'T1=boost::numeric::ublas::matrix_unary2<E,F>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): note: 'E2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,vector_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::vector_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E> &' from 'boost::numeric::ublas::matrix_unary2<E,F>'
+          with
+          [
+              E=boost::numeric::ublas::c_matrix<double,3,3>,
+              F=boost::numeric::ublas::scalar_identity<double>
+          ]
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1484): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,vector_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::vector_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E2> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1241): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(const std::complex<_Other> &,I)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::matrix_unary2<E,F>'
+          with
+          [
+              E=boost::numeric::ublas::c_matrix<double,3,3>,
+              F=boost::numeric::ublas::scalar_identity<double>
+          ]
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(119): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(I,const std::complex<_Other> &)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(109): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(170): error C2676: binary '*': 'boost::numeric::ublas::matrix_unary2<E,F>' does not define this operator or a conversion to a type acceptable to the predefined operator
+          with
+          [
+              E=boost::numeric::ublas::c_matrix<double,3,3>,
+              F=boost::numeric::ublas::scalar_identity<double>
+          ]
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3940): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T2,E1::value_type>,matrix_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::matrix_expression<E> &,const T2 &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: 'E1=boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: 'T2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::matrix_expression<E2> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\matrix_expression.hpp(3417): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2893: Failed to specialize function template 'enable_if<boost::is_convertible<T1,E2::value_type>,matrix_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::matrix_expression<E2> &)'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: With the following template arguments:
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: 'T1=boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): note: 'E2=boost::numeric::ublas::c_matrix<double,3,3>'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'enable_if<boost::is_convertible<T2,E1::value_type>,vector_binary_scalar2_traits<E1,const T2,boost::numeric::ublas::scalar_multiplies<E1::value_type,T2>>::result_type>::type boost::numeric::ublas::operator *(const boost::numeric::ublas::vector_expression<E> &,const T2 &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1484): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'enable_if<boost::is_convertible<T1,E2::value_type>,vector_binary_scalar1_traits<const T1,E2,boost::numeric::ublas::scalar_multiplies<T1,E2::value_type>>::result_type>::type boost::numeric::ublas::operator *(const T1 &,const boost::numeric::ublas::vector_expression<E2> &)': could not deduce template argument for 'const boost::numeric::ublas::vector_expression<E2> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\vector_expression.hpp(1241): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(const std::complex<_Other> &,I)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(119): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2784: 'boost::enable_if<boost::mpl::and_<boost::is_float<T>,boost::is_integral<I>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,std::complex<_Other>>::type boost::numeric::ublas::operator *(I,const std::complex<_Other> &)': could not deduce template argument for 'const std::complex<_Other> &' from 'boost::numeric::ublas::c_matrix<double,3,3>'
+  c:\users\jordan\downloads\boost_1_60_0\boost_1_60_0\boost\numeric\ublas\traits.hpp(109): note: see declaration of 'boost::numeric::ublas::operator *'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(174): error C2676: binary '*': 'boost::numeric::ublas::c_matrix<double,3,3>' does not define this operator or a conversion to a type acceptable to the predefined operator
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physics.h(177): error C3861: 'inverse': identifier not found
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(6): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(7): error C2143: syntax error: missing ',' before '&'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(23): error C2143: syntax error: missing ';' before '&'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(23): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(64): error C2327: 'PhysicalObject::Model': is not a type name, static, or enumerator
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(64): error C3646: 'm_oMesh': unknown override specifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(64): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(6): error C2065: 'i_oIntrinsicState': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(11): error C2065: 'i_oExtrinsicState': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(12): error C2065: 'i_oModel': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(13): error C2789: 'PhysicalObject::Model': an object of const-qualified type must be initialized
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(23): note: see declaration of 'PhysicalObject::Model'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(13): error C2614: 'PhysicalObject': illegal member initialization: 'm_oModel' is not a base or member
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(51): error C2065: 'm_oMesh': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(51): error C2228: left of '.ScalingMatrix' must have class/struct/union
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(51): note: type is 'unknown-type'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(76): error C2064: term does not evaluate to a function taking 0 arguments
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(76): error C2228: left of '.size' must have class/struct/union
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(77): error C2064: term does not evaluate to a function taking 0 arguments
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(77): error C2228: left of '.size' must have class/struct/union
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(83): error C2064: term does not evaluate to a function taking 0 arguments
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(83): error C2228: left of '.data' must have class/struct/union
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(83): error C2660: 'DisplayTriangles': function does not take 3 arguments
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(102): error C2039: 'time_duration': is not a member of 'std::chrono::steady_clock'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\chrono(732): note: see declaration of 'std::chrono::steady_clock'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(103): error C2065: 'time_duration': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(103): error C2146: syntax error: missing ';' before identifier 'nTimeSinceLastUpdate'
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(103): error C2065: 'nTimeSinceLastUpdate': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(109): error C2065: 'nTimeSinceLastUpdate': undeclared identifier
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(118): error C2662: 'void Scene::AdvanceStates(double)': cannot convert 'this' pointer from 'const Scene' to 'Scene &'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(118): note: Conversion loses qualifiers
+c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(121): error C2662: 'void Scene::DrawAll(void)': cannot convert 'this' pointer from 'const Scene' to 'Scene &'
+  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\drawscene.cpp(121): note: Conversion loses qualifiers
   Generating Code...
-  OpenGLTest1.vcxproj -> C:\Users\Jordan\Documents\Visual Studio 2013\Projects\OpenGLTest1\Debug\OpenGLTest1.exe

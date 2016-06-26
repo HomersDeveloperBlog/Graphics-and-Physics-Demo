@@ -1,7 +1,12 @@
+#include "stdafx.h"
+
+#include "assert.h"
+
 #include "GLSLBuild.h"
 #include "Program.h"
 
 #define OGL_INVALID_PROGRAM_HANDLE static_cast<GLint>(0)
+#define OGL_MAX_EXPECTED_SHADER_COUNT static_cast<GLsizei>(5)
 
 OpenGLProgram::OpenGLProgram()
 {
@@ -110,8 +115,6 @@ void OpenGLProgram::Use() const
         throw;
 }
 
-#define OGL_MAX_EXPECTED_SHADER_COUNT static_cast<GLsizei>(5)
-
 void OpenGLProgram::DetachAll()
 {
     //Get attached shader count
@@ -154,6 +157,20 @@ void OpenGLProgram::DetachAll()
         if(GetOpenGLError(__FILE__, __LINE__))
             throw;
     }
+}
+
+GLuint OpenGLProgram::GetAttributeLocation(
+	std::string & i_strName)
+{
+	GLint glnLayoutNumber = glGetAttribLocation(
+		*m_pglnProgramHandle,
+		static_cast<GLchar *>(i_strName.data()));
+	assert(glnLayoutNumber >= 0);
+	if(GetOpenGLError(__FILE__, __LINE__)
+		glnLayoutNumber < 0)
+		throw;
+
+	return static_cast<GLuint>(glnLayoutNumber);
 }
 
 //%deprecated
