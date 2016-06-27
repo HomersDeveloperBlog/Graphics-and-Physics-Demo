@@ -9,6 +9,7 @@ using namespace boost::numeric;
 using namespace boost::numeric::ublas; //%maybe not a good idea to do this
 using namespace boost::numeric::odeint; //%maybe not a good idea to do this
 
+//http://www.boost.org/doc/libs/1_58_0/libs/utility/operators.htm
 #include <boost/operators.hpp>
 
 class PhysicalExtrinsicState
@@ -121,6 +122,9 @@ c_matrix<double, 3U, 3U> GetSkew(
 	return aadReturnValue;
 }
 
+//We must support addition of state_type's and scalar multiplication by time_type
+//http://headmyshoulder.github.io/odeint-v2/doc/boost_numeric_odeint/odeint_in_detail/state_types__algebras_and_operations.html
+
 class PhysicalIntrinsicState
 {
 public:
@@ -148,33 +152,58 @@ public:
 		return bMassIsNonZero && bInertiaTensorIsFullRank;
 	}
 
-	//%odeint probably requires PhysicalExtrinsicState to allow +, *scalar.
-	//http://headmyshoulder.github.io/odeint-v2/doc/boost_numeric_odeint/odeint_in_detail/state_types__algebras_and_operations.html
-	//We must support addition of state_type's and scalar multiplication by time_type
 	void operator() (
 		const PhysicalExtrinsicState & i_adState,
 		PhysicalExtrinsicState & o_adState_Diff, //%aliasing
 		const double i_dTime)
 	{
+		//%ublas peculiarities require temporaries in chained multiplication
 		o_adState_Diff.Position() = i_adState.Velocity();
 		o_adState_Diff.Velocity() = (1.0 / m_dMass) * zero_vector<double>(3U); //%force here.
 		
 		//W_skew
-		c_matrix<double, 3U, 3U> aadWSkew = GetSkew(i_adState.AngularVelocity());
+		c_matrix<double, 3U, 3U> aadWSkew = GetSkew(
+			i_adState.AngularVelocity());
 		
 		//We have R' = w cross R; The matrix ODE R' = W_skew*R
-		o_adState_Diff.AngularPosition() = aadWSkew * i_adState.AngularPosition();
+		o_adState_Diff.AngularPosition() = prod(
+			aadWSkew, 
+			i_adState.AngularPosition());
 		
 		//I = R^T I_0 R
-		c_matrix<double, 3U, 3U> aadTransformedInertia =  //%transpose multiply would be nice
-			trans(i_adState.AngularPosition()) * m_aadInertia * i_adState.AngularPosition();
+		c_matrix<double, 3U, 3U> aadTransformedInertia = prod(
+			c_matrix<double, 3U, 3U>( prod(
+				trans(i_adState.AngularPosition()), 
+				m_aadInertia)), 
+			i_adState.AngularPosition());
 		
 		//Tau = dL/dt + w cross L
 		c_vector<double, 3U> adAngularMomentum = zero_vector<double>(3U) //%torque about centre here
-			- aadWSkew * aadTransformedInertia * i_adState.AngularVelocity();
-		 
+			- prod(
+				c_matrix<double, 3U, 3U>( prod( //%compiler having difficulty with this temp creation
+					aadWSkew, 
+					aadTransformedInertia), 
+				i_adState.AngularVelocity()));
+
+		//try reintroducing temporaries using either 
+		//prod (A, matrix_type (prod (B, C))) //or
+		//prod (A, prod<matrix_type > (B, C))
+
 		//L=Iw -> w = (I^-1)*L
-		o_adState_Diff.AngularVelocity() = inverse(aadTransformedInertia) * adAngularMomentum;
+		o_adState_Diff.AngularVelocity() = solve( //%look up exact call. Might have to be triangular -_-
+			aadTransformedInertia, 
+			adAngularMomentum);
+
+		//%brilliant! inverse is not directly provided. must LU factor first
+		//http://www.crystalclearsoftware.com/cgi-bin/boost_wiki/wiki.pl?LU_Matrix_Inversion
+		//Ainv = identity_matrix<float>(A.size1());
+		//permutation_matrix<size_t> pm(A.size1());
+		//lu_factorize(A,pm)
+		//lu_substitute(A, pm, Ainv);
+		//If all you need is a solution for Ax=y, just use 
+		//permutation_matrix<size_t> pm(A.size1()); 
+		//lu_factorize(A, pm);
+		//lu_substitute(A, pm, y); //and y is replaced with the solution
 	}
 
 protected:
