@@ -5,15 +5,15 @@
 static const size_t nTriangleCount0 = 2U;
 static const float aafMeshVertices0[3 * nTriangleCount0][2] = //6 vertices, 2 components each
 {
-	{0.0, 0.0}, {0.1, 0.0}, {0.0, 0.1},
-	{0.0, 0.1}, {0.1, 0.0}, {0.1, 0.1},
+	{0.0f, 0.0f}, {0.1f, 0.0f}, {0.0f, 0.1f},
+	{0.0f, 0.1f}, {0.1f, 0.0f}, {0.1f, 0.1f},
 };
 
 static const size_t nTriangleCount1 = 2U;
 static const float aafMeshVertices1[3 * nTriangleCount1][3] = //6 vertices, 2 components each
 {
-	{0.0, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.0, 0.1, 0.0},
-	{0.0, 0.1, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.1, 0.0},
+	{0.0f, 0.0f, 0.0f}, {0.1f, 0.0f, 0.0f}, {0.0f, 0.1f, 0.0f},
+	{0.0f, 0.1f, 0.0f}, {0.1f, 0.0f, 0.0f}, {0.1f, 0.1f, 0.0f},
 };
 
 //%can even put this elsewhere

@@ -1,5 +1,10 @@
+#include "PhysicalObject.h"
+#include "Scene.h"
+
+using namespace std;
+
 void Scene::AddObject(
-	const PhysicalObject * i_pNewObject)
+	PhysicalObject * i_pNewObject)
 {
 	vectObjects.push_back(i_pNewObject);
 }
@@ -68,9 +73,9 @@ void Scene::DrawAll()
 		//	throw;
 			
 		//Get model buffer. Query buffer size. Bind it.
-		size_t nBufferSize = pObject->ModelBuffer().Size();
-		GLint glnBufferSize = static_cast<GLint>(nBufferSize);
-		assert(glnBufferSize > 0);
+		//size_t nBufferSize = pObject->Model().Buffer().Size();
+		//GLint glnBufferSize = static_cast<GLint>(nBufferSize);
+		//assert(glnBufferSize > 0);
 			
 		pObject->Model().Buffer().Bind();
 			
@@ -78,7 +83,7 @@ void Scene::DrawAll()
 		glDrawArrays(
 			GL_TRIANGLES,
 			0,
-			glnBufferSize);
+			48);//glnBufferSize);
 		if(GetOpenGLError(__FILE__, __LINE__))
 			throw;
 			

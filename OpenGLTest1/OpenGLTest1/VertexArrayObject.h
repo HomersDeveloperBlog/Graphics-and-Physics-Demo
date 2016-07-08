@@ -1,4 +1,6 @@
-//%For now we only need one and we will bind it at the start of the program.
+#pragma once
+
+#include <memory>
 
 #include "GLBase.h"
 
@@ -7,7 +9,7 @@ class OpenGLVertexArrayObject
 public:
     OpenGLVertexArrayObject();
     
-    GLint RawHandle() const {return *m_pglnVAOHandle;}
+    GLuint RawHandle() const {return *m_pglnVAOHandle;}
     
     void Bind() const;
     void DefineAttributeSourceFormat(
@@ -16,7 +18,7 @@ public:
         int i_nStride);
     
 private:
-    shared_ptr<GLint> m_pglnVAOHandle;
+    std::shared_ptr<GLuint> m_pglnVAOHandle;
 };
 
 

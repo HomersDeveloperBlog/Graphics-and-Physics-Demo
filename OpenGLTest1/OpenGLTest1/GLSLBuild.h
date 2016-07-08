@@ -8,7 +8,6 @@
 #include "GLBase.h"
 #include "Program.h"
 
-
 //%deprecated
 void CompileShaders();
 
@@ -20,8 +19,14 @@ enum ShaderType
 
 struct OpenGLShaderFile
 {
+	OpenGLShaderFile(    
+		const ShaderType & i_eShaderTypeInternal,
+		const std::string & i_strShaderFileName)
+		: m_eShaderTypeInternal(i_eShaderTypeInternal),
+		m_strShaderFileName(i_strShaderFileName) {}
+
     ShaderType m_eShaderTypeInternal;
-    std::string m_strShaderFileName;
+    const std::string m_strShaderFileName;
 };
 
 struct OpenGLProgramManifest
@@ -29,17 +34,15 @@ struct OpenGLProgramManifest
     std::vector<OpenGLShaderFile> m_vectShaderFiles;
 };
 
-class OpenGLShaderSource
+struct OpenGLShaderSource
 {
-public:
     OpenGLShaderSource(const OpenGLShaderFile & oShaderFile);
 
     static GLint ConvertInternalShaderEnumToOGL(
         ShaderType i_eShaderType);
-            
-private:
+
     GLint m_glnShaderType;
-    std::string m_strShaderSource;
+    const std::string m_strShaderSource;
 };
 
 class OpenGLProgramSource
@@ -50,5 +53,5 @@ public:
     OpenGLProgram BuildProgram();
     
 private:
-    std::vector<OpenGLShaderFile> m_vectShaderSources;
+    std::vector<OpenGLShaderSource> m_vectShaderSources;
 };

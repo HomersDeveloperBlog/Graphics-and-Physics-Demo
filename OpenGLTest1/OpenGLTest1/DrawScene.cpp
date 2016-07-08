@@ -11,6 +11,7 @@
 #include "DrawScene.h"
 
 using namespace std;
+using namespace chrono;
 
 //%deprecated
 tuple<GLuint, GLuint> SetupShaderIO()
@@ -68,23 +69,23 @@ void DisplayTriangles(
 	glFlush(); //%not sure what would happen if this were removed. move to end of sequence
 }
 
-void DrawPhysicalObject( //%member of physical object?
-	GLuint i_hArrayBuffer, //%wrap these two into a struct
-	GLuint i_hVertexArrayObject,
-	const PhysicalObject & i_oObject)
-{
-	assert(!(i_oObject.Model().size() % 9U));
-	size_t nTriangleCount = i_oObject.Model().size() / 9U;
-	
-	DisplayTriangles(
-		i_hArrayBuffer,
-		i_hVertexArrayObject,
-		nTriangleCount,
-		i_oObject.Model().data());
-}
+//void DrawPhysicalObject( //%member of physical object?
+//	GLuint i_hArrayBuffer, //%wrap these two into a struct
+//	GLuint i_hVertexArrayObject,
+//	const PhysicalObject & i_oObject)
+//{
+//	assert(!(i_oObject.Model().size() % 9U));
+//	size_t nTriangleCount = i_oObject.Model().size() / 9U;
+//	
+//	DisplayTriangles(
+//		i_hArrayBuffer,
+//		i_hVertexArrayObject,
+//		nTriangleCount,
+//		i_oObject.Model().data());
+//}
 
 void GameUpdateLoop(
-	const Scene & i_oScene)
+	Scene & i_oScene)
 {
 	//Setup timers
 	auto nUpdateInterval = chrono::milliseconds(16);
@@ -93,21 +94,21 @@ void GameUpdateLoop(
 	
 	while(true)
 	{
-		//Wait until appropriate time.
 		while(nCurrentTime < nNextUpdateTime);
 		{
 			nCurrentTime = chrono::steady_clock::now();
 		}
 		
-		chrono::steady_clock::time_duration nTimeSinceLastUpdate
-			= nCurrentTime - (nNextUpdateTime - nUpdateInterval);
-		nNextUpdateTime = nCurrentTime + nUpdateInterval;
-		//Are we sure we don't want += nUpdateInterval, with the option to 
-		//Skip updates if we fall behind. That is, consume events except most recent.
-		//Right now we are effectively specifying "at least 16 milliseconds update interval"
-		
-		double dTimeSinceLastUpdate = 0.001 * static_cast<double>(nTimeSinceLastUpdate); //%convert properly
+		duration<double> oTimeSinceLastUpdate = duration_cast<duration<double>>(
+			nCurrentTime - (nNextUpdateTime - nUpdateInterval));
+		double dTimeSinceLastUpdate = /*0.001 * */oTimeSinceLastUpdate.count();
 		assert(dTimeSinceLastUpdate > 0.0);
+
+		nNextUpdateTime = nCurrentTime + nUpdateInterval;
+
+		//%Are we sure we don't want += nUpdateInterval, with the option to 
+		//%Skip updates if we fall behind. That is, consume events except most recent.
+		//%Right now we are effectively specifying "at least 16 milliseconds update interval"
 		//%could store time since last update inside physics objects.
 		//%that way we can skip events without accumulating a deltaT
 		

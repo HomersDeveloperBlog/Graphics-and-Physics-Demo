@@ -5,7 +5,7 @@
 
 #include "GLBase.h"
 
-#include "Shader.h"
+class OpenGLShader;
 
 class OpenGLProgram
 {
@@ -21,7 +21,7 @@ public:
     std::string GetLinkerMessage() const;
     void Use() const;
     void DetachAll();
-	GLuint GetAttributeLocation(std::string & i_strName);
+	GLuint GetAttributeLocation(const std::string & i_strName);
 
 private:
     std::shared_ptr<GLint> m_pglnProgramHandle; //%actually a GLuint, is a GLint on return to check correctness only.

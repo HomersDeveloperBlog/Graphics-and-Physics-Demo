@@ -51,7 +51,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS; WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>C:\Program Files\glew-1.11.0-win32\glew-1.11.0\include;C:\Program Files\freeglut-MSVC-2.8.1-1.mp\freeglut\include;C:\Users\Jordan\Downloads\boost_1_60_0\boost_1_60_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -89,6 +89,7 @@
   <ItemGroup>
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="DrawScene.h" />
+    <ClInclude Include="FileLoader.h" />
     <ClInclude Include="GLBase.h" />
     <ClInclude Include="GLSLBuild.h" />
     <ClInclude Include="LibrarySnippets.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="PhysicsBase.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
@@ -111,6 +113,7 @@
     <ClCompile Include="GLSLBuild.cpp" />
     <ClCompile Include="LibrarySnippets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicalObject.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />

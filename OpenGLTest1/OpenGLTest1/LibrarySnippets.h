@@ -1,3 +1,5 @@
+#pragma once
+
 //ublas references.
 //http://www.boost.org/doc/libs/1_60_0/libs/numeric/ublas/doc/index.html
 //http://www.crystalclearsoftware.com/cgi-bin/boost_wiki/wiki.pl?Effective_UBLAS

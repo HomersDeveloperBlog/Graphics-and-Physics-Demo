@@ -1,20 +1,25 @@
 #pragma once
 
+#include <vector>
+
 #include "GLBase.h"
+
+class PhysicalObject;
 
 //We won't try to separate objects that require physics and objects that require drawing. 
 //We also won't try to determine what does and does not need drawing.
 
 class Scene
 {
+public:
 	//Scene()	{}
 	
-	void AddObject(const PhysicalObject * i_pNewObject);
+	void AddObject(PhysicalObject * i_pNewObject);
 	void AdvanceStates(double i_dDT);
 	void DrawAll();
 
 protected:
-	vector<PhysicalObject *> vectObjects; //%not a raw pointer please
+	std::vector<PhysicalObject *> vectObjects; //%not a raw pointer please
 	GLfloat m_afCamera[16];
 	//uniforms
 	//map modelID -> buffer. For now we set buffers directly in main.

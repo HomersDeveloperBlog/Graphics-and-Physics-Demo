@@ -3,11 +3,9 @@
 #include <string>
 #include <memory>
 
-#include "GL\glew.h" //%only typedefs are needed
-#include "GL\wglew.h"
-#include "GL\freeglut.h"
+#include "GLBase.h"
 
-#include "GLSLBuild.h"
+struct OpenGLShaderSource;
 
 class OpenGLShader
 {

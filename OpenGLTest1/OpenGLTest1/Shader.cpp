@@ -4,7 +4,7 @@
 #include "GLSLBuild.h"
 #include "Shader.h"
 
-#define OGL_INVALID_SHADER_HANDLE static_cast<GLint>(0)
+using namespace std;
 
 OpenGLShader::OpenGLShader(
     const OpenGLShaderSource & i_oShaderSource) 
@@ -34,17 +34,20 @@ OpenGLShader::OpenGLShader(
         });
         
     //Load shader text
-    glShaderSource(
+    const GLchar * pchSource = static_cast<const GLchar * >(
+		i_oShaderSource.m_strShaderSource.data());
+
+	glShaderSource(
         *m_pglnShaderHandle,
         1, //one source buffer only
-        i_oShaderSource.m_strShaderSource.data(),
+        &pchSource,
         0); //no length given; string is null terminated
     if(GetOpenGLError(__FILE__, __LINE__))
         throw;
 }
     
 //True on success, false otherwise.
-bool OpenGLShader::GetCompileStatus() 
+bool OpenGLShader::GetCompileStatus() const
 {
     GLint glnCompileStatus = GL_FALSE;
     glGetShaderiv(
@@ -67,7 +70,7 @@ bool OpenGLShader::Compile()
     return GetCompileStatus();
 }
      
-string OpenGLShader::GetCompilerMessage()
+string OpenGLShader::GetCompilerMessage() const
 {
     GLint glnInfoLogLength = -1;
     glGetShaderiv(
@@ -81,7 +84,7 @@ string OpenGLShader::GetCompilerMessage()
     if(glnInfoLogLength > 0)
     {
         shared_ptr<char> pchInfoLogBuffer = shared_ptr<char>(
-            new char[glnInfoLogLength],
+            new char[glnInfoLogLength], //could throw
             [](char * i_pBuffer)
             {
                 delete [] i_pBuffer;
@@ -92,109 +95,109 @@ string OpenGLShader::GetCompilerMessage()
             *m_pglnShaderHandle, 
             glnInfoLogLength, 
             &nReturnedLength, 
-            pchInfoLogBuffer);
+            pchInfoLogBuffer.get());
         assert(nReturnedLength == glnInfoLogLength);
         if(!GetOpenGLError(__FILE__, __LINE__))
             throw;
                 
-        return string(pchInfoLogBuffer);
+        return string(pchInfoLogBuffer.get());
     }
     
     return string("<<empty message>>");
 }
     
-//%deprecated.
-//API wrapper implemented in C-style. God help us all.
-//Non-zero valid shader handle on success, 0 otherwise.
-GLint CompileShaderFromSource(
-	const OpenGLShaderSource & i_oShaderSource)
-{
-	//Create shader object
-	GLuint glnShaderHandle = glCreateShader(i_oShaderSource.m_glnShaderType);
-	assert(glnShaderHandle > OGL_INVALID_SHADER_HANDLE);
-	if(GetOpenGLError(__FILE__, __LINE__)
-		|| glnShaderHandle <= OGL_INVALID_SHADER_HANDLE)
-	{
-		assert(!glIsShader(glnShaderHandle));
-		return OGL_INVALID_SHADER_HANDLE;
-	}
-	
-	//Load shader text
-	glShaderSource(
-		glnShaderHandle,
-		1, //one source buffer only
-		i_oShaderSource.m_strShaderSource.data(),
-		0); //no length given; string is null terminated
-	if(GetOpenGLError(__FILE__, __LINE__))
-	{
-		glDeleteShader(glnShaderHandle);
-		assert(!GetOpenGLError(__FILE__, __LINE__));
-		return OGL_INVALID_SHADER_HANDLE;
-	}
-	
-	//Compile shader
-	glCompileShader(glnShaderHandle);
-	if(GetOpenGLError(__FILE__, __LINE__))
-	{
-		glDeleteShader(glnShaderHandle);
-		assert(!GetOpenGLError(__FILE__, __LINE__));
-		return OGL_INVALID_SHADER_HANDLE;
-	}
-		
-	//Check compile status
-	GLint glnCompileStatus = GL_FALSE;
-	glGetShaderiv(
-		glnShaderHandle, 
-		GL_COMPILE_STATUS, 
-		&glnCompileStatus);
-	if(GetOpenGLError(__FILE__, __LINE__))
-	{
-		glDeleteShader(glnShaderHandle);
-		assert(!GetOpenGLError(__FILE__, __LINE__));
-		return OGL_INVALID_SHADER_HANDLE;
-	}
-
-#ifdef _DEBUG
-	//Dump compiler message
-	GLint glnInfoLogLength = -1;
-	glGetShaderiv(
-		glnShaderHandle, 
-		GL_INFO_LOG_LENGTH, 
-		&glnInfoLogLength);
-	assert(glnInfoLogLength > 0);
-	
-	if(!GetOpenGLError(__FILE__, __LINE__)
-		&& glnInfoLogLength > 0)
-	{
-		shared_ptr<char> pchInfoLogBuffer = 
-			shared_ptr<char>(new (no_throw) char[glnInfoLogLength]);
-		assert(pchInfoLogBuffer);
-		
-		if(pchInfoLogBuffer)
-		{
-			GLsizei nReturnedLength = 0;
-			glGetShaderInfoLog(
-				glnShaderHandle, 
-				glnInfoLogLength, 
-				&nReturnedLength, 
-				pchInfoLogBuffer);
-			assert(nReturnedLength == glnInfoLogLength);
-			
-			if(!GetOpenGLError(__FILE__, __LINE__))
-			{
-				cerr << pchInfoLogBuffer << endl;
-			}
-		}
-	}
-#endif //_DEBUG
-
-	assert(glnCompileStatus == GL_TRUE);
-	if(glnCompileStatus == GL_FALSE)
-	{
-		glDeleteShader(glnShaderHandle);
-		assert(!GetOpenGLError(__FILE__, __LINE__));
-		return OGL_INVALID_SHADER_HANDLE;
-	}
-	
-	return glnShaderHandle;
-}
+////%deprecated.
+////API wrapper implemented in C-style. God help us all.
+////Non-zero valid shader handle on success, 0 otherwise.
+//GLint CompileShaderFromSource(
+//	const OpenGLShaderSource & i_oShaderSource)
+//{
+//	//Create shader object
+//	GLuint glnShaderHandle = glCreateShader(i_oShaderSource.m_glnShaderType);
+//	assert(glnShaderHandle > OGL_INVALID_SHADER_HANDLE);
+//	if(GetOpenGLError(__FILE__, __LINE__)
+//		|| glnShaderHandle <= OGL_INVALID_SHADER_HANDLE)
+//	{
+//		assert(!glIsShader(glnShaderHandle));
+//		return OGL_INVALID_SHADER_HANDLE;
+//	}
+//	
+//	//Load shader text
+//	glShaderSource(
+//		glnShaderHandle,
+//		1, //one source buffer only
+//		i_oShaderSource.m_strShaderSource.data(),
+//		0); //no length given; string is null terminated
+//	if(GetOpenGLError(__FILE__, __LINE__))
+//	{
+//		glDeleteShader(glnShaderHandle);
+//		assert(!GetOpenGLError(__FILE__, __LINE__));
+//		return OGL_INVALID_SHADER_HANDLE;
+//	}
+//	
+//	//Compile shader
+//	glCompileShader(glnShaderHandle);
+//	if(GetOpenGLError(__FILE__, __LINE__))
+//	{
+//		glDeleteShader(glnShaderHandle);
+//		assert(!GetOpenGLError(__FILE__, __LINE__));
+//		return OGL_INVALID_SHADER_HANDLE;
+//	}
+//		
+//	//Check compile status
+//	GLint glnCompileStatus = GL_FALSE;
+//	glGetShaderiv(
+//		glnShaderHandle, 
+//		GL_COMPILE_STATUS, 
+//		&glnCompileStatus);
+//	if(GetOpenGLError(__FILE__, __LINE__))
+//	{
+//		glDeleteShader(glnShaderHandle);
+//		assert(!GetOpenGLError(__FILE__, __LINE__));
+//		return OGL_INVALID_SHADER_HANDLE;
+//	}
+//
+//#ifdef _DEBUG
+//	//Dump compiler message
+//	GLint glnInfoLogLength = -1;
+//	glGetShaderiv(
+//		glnShaderHandle, 
+//		GL_INFO_LOG_LENGTH, 
+//		&glnInfoLogLength);
+//	assert(glnInfoLogLength > 0);
+//	
+//	if(!GetOpenGLError(__FILE__, __LINE__)
+//		&& glnInfoLogLength > 0)
+//	{
+//		shared_ptr<char> pchInfoLogBuffer = 
+//			shared_ptr<char>(new (no_throw) char[glnInfoLogLength]);
+//		assert(pchInfoLogBuffer);
+//		
+//		if(pchInfoLogBuffer)
+//		{
+//			GLsizei nReturnedLength = 0;
+//			glGetShaderInfoLog(
+//				glnShaderHandle, 
+//				glnInfoLogLength, 
+//				&nReturnedLength, 
+//				pchInfoLogBuffer);
+//			assert(nReturnedLength == glnInfoLogLength);
+//			
+//			if(!GetOpenGLError(__FILE__, __LINE__))
+//			{
+//				cerr << pchInfoLogBuffer << endl;
+//			}
+//		}
+//	}
+//#endif //_DEBUG
+//
+//	assert(glnCompileStatus == GL_TRUE);
+//	if(glnCompileStatus == GL_FALSE)
+//	{
+//		glDeleteShader(glnShaderHandle);
+//		assert(!GetOpenGLError(__FILE__, __LINE__));
+//		return OGL_INVALID_SHADER_HANDLE;
+//	}
+//	
+//	return glnShaderHandle;
+//}

@@ -1,10 +1,14 @@
 #include "stdafx.h"
-
 #include "assert.h"
 #include <tuple>
+#include <string>
 
 #include "GLBase.h"
+#include "Model.h"
+#include "Buffer.h"
+#include "Scene.h"
 #include "Meshes.h"
+#include "PhysicalObject.h"
 #include "Physics.h"
 #include "GLSLBuild.h"
 #include "VertexArrayObject.h"
@@ -15,8 +19,7 @@ using namespace std;
 void InitializeOpenGLEnvironment()
 {
 	//Initialize OpenGL Utility (set basic settings, create a window)
-	int nArgc = 0; char ** astrArgv = 0;
-	glutInit(&nArgc, astrArgv);
+	glutInit(0, nullptr);
 	glutInitDisplayMode(GLUT_RGBA); //%and this
 	glutInitWindowSize(512, 512); //%can this go at the end before the window name?
 	glutInitContextVersion(2, 0);
@@ -78,7 +81,7 @@ int main(
 	
 	//Create scene, enter update loop
 	Scene oScene;
-	oScene.AddObject(oPendulum);
+	oScene.AddObject(&oPendulum);
 	GameUpdateLoop(oScene); //%shove into scene.
 	
 	//glutDisplayFunc(UpdateDisplay);

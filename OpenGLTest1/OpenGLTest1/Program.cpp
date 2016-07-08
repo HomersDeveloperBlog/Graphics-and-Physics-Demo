@@ -1,12 +1,12 @@
 #include "stdafx.h"
-
 #include "assert.h"
+#include <iostream>
 
 #include "GLSLBuild.h"
+#include "Shader.h" //%circular: AttachShader(const OpenGLShader &)
 #include "Program.h"
 
-#define OGL_INVALID_PROGRAM_HANDLE static_cast<GLint>(0)
-#define OGL_MAX_EXPECTED_SHADER_COUNT static_cast<GLsizei>(5)
+using namespace std;
 
 OpenGLProgram::OpenGLProgram()
 {
@@ -50,7 +50,7 @@ void OpenGLProgram::DetachShader(
         throw;
 }
     
-bool OpenGLProgram::GetLinkStatus()
+bool OpenGLProgram::GetLinkStatus() const
 {
     GLint glnLinkStatus = GL_FALSE;
     glGetProgramiv(
@@ -72,7 +72,7 @@ bool OpenGLProgram::Link()
     return GetLinkStatus();
 }
     
-string OpenGLProgram::GetLinkerMessage()
+string OpenGLProgram::GetLinkerMessage() const
 {
     GLint glnInfoLogLength = -1;
     glGetProgramiv(
@@ -97,12 +97,12 @@ string OpenGLProgram::GetLinkerMessage()
             *m_pglnProgramHandle, 
             glnInfoLogLength, 
             &nReturnedLength, 
-            pchInfoLogBuffer);
+            static_cast<GLchar *>(pchInfoLogBuffer.get()));
         assert(nReturnedLength == glnInfoLogLength);
         if(!GetOpenGLError(__FILE__, __LINE__))
             throw;
                     
-        return string(pchInfoLogBuffer);
+        return string(pchInfoLogBuffer.get());
     }
     
     return string("<<empty message>>");
@@ -139,7 +139,7 @@ void OpenGLProgram::DetachAll()
     glGetAttachedShaders(	
         *m_pglnProgramHandle,
         OGL_MAX_EXPECTED_SHADER_COUNT,
-        glnShadersWritten,
+        &glnShadersWritten,
         aglnShaderHandles);
     assert(glnShadersWritten == glnAttachedShaderCount);
     if(GetOpenGLError(__FILE__, __LINE__)
@@ -160,14 +160,14 @@ void OpenGLProgram::DetachAll()
 }
 
 GLuint OpenGLProgram::GetAttributeLocation(
-	std::string & i_strName)
+	const std::string & i_strName)
 {
 	GLint glnLayoutNumber = glGetAttribLocation(
 		*m_pglnProgramHandle,
-		static_cast<GLchar *>(i_strName.data()));
+		static_cast<const GLchar *>(i_strName.data()));
 	assert(glnLayoutNumber >= 0);
 	if(GetOpenGLError(__FILE__, __LINE__)
-		glnLayoutNumber < 0)
+		|| glnLayoutNumber < 0)
 		throw;
 
 	return static_cast<GLuint>(glnLayoutNumber);
@@ -205,7 +205,7 @@ bool LinkProgram(
 		&& glnInfoLogLength > 0)
 	{
 		shared_ptr<char> pchInfoLogBuffer = 
-			shared_ptr<char>(new (no_throw) char[glnInfoLogLength]);
+			shared_ptr<char>(new (nothrow) char[glnInfoLogLength]);
 		assert(pchInfoLogBuffer);
 		
 		if(pchInfoLogBuffer)
@@ -215,7 +215,7 @@ bool LinkProgram(
 				i_glnProgramHandle, 
 				glnInfoLogLength, 
 				&nReturnedLength, 
-				pchInfoLogBuffer);
+				static_cast<GLchar *>(pchInfoLogBuffer.get()));
 			assert(nReturnedLength == glnInfoLogLength);
 			
 			if(!GetOpenGLError(__FILE__, __LINE__))
