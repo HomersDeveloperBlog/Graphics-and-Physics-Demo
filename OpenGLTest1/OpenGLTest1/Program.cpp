@@ -82,8 +82,8 @@ string OpenGLProgram::GetLinkerMessage() const
     if(GetOpenGLError(__FILE__, __LINE__))
         throw;
                 
-    assert(glnInfoLogLength > 0);
-    if(glnInfoLogLength > 0)
+    assert(glnInfoLogLength >= 1);
+    if(glnInfoLogLength > 1)
     {
         shared_ptr<char> pchInfoLogBuffer = shared_ptr<char>(
             new char[glnInfoLogLength],
@@ -99,13 +99,13 @@ string OpenGLProgram::GetLinkerMessage() const
             &nReturnedLength, 
             static_cast<GLchar *>(pchInfoLogBuffer.get()));
         assert(nReturnedLength == glnInfoLogLength);
-        if(!GetOpenGLError(__FILE__, __LINE__))
+        if(GetOpenGLError(__FILE__, __LINE__))
             throw;
                     
         return string(pchInfoLogBuffer.get());
     }
     
-    return string("<<empty message>>");
+    return string("Linker: <<empty message>>");
 }
 
 void OpenGLProgram::Use() const

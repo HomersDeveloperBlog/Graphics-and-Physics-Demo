@@ -80,8 +80,8 @@ string OpenGLShader::GetCompilerMessage() const
     if(GetOpenGLError(__FILE__, __LINE__))
         throw;
             
-    assert(glnInfoLogLength > 0);
-    if(glnInfoLogLength > 0)
+    assert(glnInfoLogLength >= 1); //null terminator only
+    if(glnInfoLogLength > 1)
     {
         shared_ptr<char> pchInfoLogBuffer = shared_ptr<char>(
             new char[glnInfoLogLength], //could throw
@@ -96,14 +96,14 @@ string OpenGLShader::GetCompilerMessage() const
             glnInfoLogLength, 
             &nReturnedLength, 
             pchInfoLogBuffer.get());
-        assert(nReturnedLength == glnInfoLogLength);
-        if(!GetOpenGLError(__FILE__, __LINE__))
+        //assert(nReturnedLength == glnInfoLogLength);
+        if(GetOpenGLError(__FILE__, __LINE__))
             throw;
                 
         return string(pchInfoLogBuffer.get());
     }
     
-    return string("<<empty message>>");
+    return string("Shader: <<empty message>>");
 }
     
 ////%deprecated.

@@ -39,8 +39,8 @@ void OpenGLVertexArrayObject::DefineAttributeSourceFormat(
     int i_nVectorDimension,
     int i_nStride)
 {
-    assert(i_nIndex > 0);
-    assert(i_nVectorDimension > 0 && i_nStride > 0);
+    assert(i_nIndex >= 0);
+    assert(i_nVectorDimension > 0 && i_nStride >= 0);
         
     //Bind this VAO
     glBindVertexArray(*m_pglnVAOHandle);
@@ -59,9 +59,10 @@ void OpenGLVertexArrayObject::DefineAttributeSourceFormat(
         throw;
     
     //Enable attribute
-    glEnableVertexArrayAttrib(
-        *m_pglnVAOHandle,
-        i_nIndex);
+	glEnableVertexAttribArray(i_nIndex);
+    //glEnableVertexArrayAttrib( //%need higher version for this
+    //    *m_pglnVAOHandle,
+    //    i_nIndex);
     if(GetOpenGLError(__FILE__, __LINE__))
         throw;
  }

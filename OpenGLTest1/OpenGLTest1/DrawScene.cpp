@@ -39,9 +39,10 @@ tuple<GLuint, GLuint> SetupShaderIO()
 		(void*)(0)); //offset from start of bound GL_ARRAY_BUFFER
 	glEnableVertexAttribArray(0);
 	
-	return make_pair(hArrayBuffer, hVertexArrayObject);
+	return make_pair(hArrayBuffer, hVertexArrayObject);//hVertexArrayObject);
 }
 
+//%deprecated
 void DisplayTriangles(
 	GLuint i_hArrayBuffer,
 	GLuint i_hVertexArrayObject,
@@ -57,9 +58,9 @@ void DisplayTriangles(
 	unsigned int nVertexCount = 3U * i_nTriangleCount;
 	unsigned int nComponentCount = 2U * nVertexCount;
 	glBufferData( //%don't do this every time
-		GL_ARRAY_BUFFER, 
-		sizeof(*i_vertices) * nComponentCount, 
-		i_vertices, 
+		GL_ARRAY_BUFFER,
+		sizeof(*i_vertices) * nComponentCount,
+		i_vertices,
 		GL_STATIC_DRAW);
 	glDrawArrays(
 		GL_TRIANGLES,
@@ -68,21 +69,6 @@ void DisplayTriangles(
 
 	glFlush(); //%not sure what would happen if this were removed. move to end of sequence
 }
-
-//void DrawPhysicalObject( //%member of physical object?
-//	GLuint i_hArrayBuffer, //%wrap these two into a struct
-//	GLuint i_hVertexArrayObject,
-//	const PhysicalObject & i_oObject)
-//{
-//	assert(!(i_oObject.Model().size() % 9U));
-//	size_t nTriangleCount = i_oObject.Model().size() / 9U;
-//	
-//	DisplayTriangles(
-//		i_hArrayBuffer,
-//		i_hVertexArrayObject,
-//		nTriangleCount,
-//		i_oObject.Model().data());
-//}
 
 void GameUpdateLoop(
 	Scene & i_oScene)
@@ -94,7 +80,7 @@ void GameUpdateLoop(
 	
 	while(true)
 	{
-		while(nCurrentTime < nNextUpdateTime);
+		while(nCurrentTime < nNextUpdateTime)
 		{
 			nCurrentTime = chrono::steady_clock::now();
 		}
@@ -116,7 +102,7 @@ void GameUpdateLoop(
 		//Consuming this information: Update camera position/frame
 		
 		//Physics tick
-		i_oScene.AdvanceStates(dTimeSinceLastUpdate);
+		//i_oScene.AdvanceStates(dTimeSinceLastUpdate); //%uncomment
 		
 		//Graphics update
 		i_oScene.DrawAll();

@@ -6,10 +6,10 @@
 #include "GLBase.h"
 #include "Buffer.h"
 
-class Model
+class DisplayModel
 {
 public:
-	Model(const OpenGLBuffer & i_hBuffer,
+	DisplayModel(const OpenGLBuffer & i_hBuffer,
         const boost::numeric::ublas::c_matrix<double, 3U, 3U> & i_aadScaling)
 		: m_hBuffer(i_hBuffer),
         m_aadScaling(i_aadScaling) {}

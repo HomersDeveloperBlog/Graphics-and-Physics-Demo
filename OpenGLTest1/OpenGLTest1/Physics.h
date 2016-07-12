@@ -59,6 +59,8 @@ public:
 		m_adVelocity += i_oState.Velocity();
 		m_adAngularPosition += i_oState.AngularPosition();
 		m_adAngularVelocity += i_oState.AngularVelocity();
+
+		return *this;
 	}
 
     PhysicalExtrinsicState operator-=(
@@ -68,6 +70,8 @@ public:
 		m_adVelocity -= i_oState.Velocity();
 		m_adAngularPosition -= i_oState.AngularPosition();
 		m_adAngularVelocity -= i_oState.AngularVelocity();
+
+		return *this;
 	}
 	
 	PhysicalExtrinsicState operator*=(
@@ -77,6 +81,8 @@ public:
 		m_adVelocity *= i_dConstant;
 		m_adAngularPosition *= i_dConstant;
 		m_adAngularVelocity *= i_dConstant;
+
+		return *this;
 	}
 	
 	PhysicalExtrinsicState operator/=(
@@ -86,6 +92,8 @@ public:
 		m_adVelocity /= i_dConstant;
 		m_adAngularPosition /= i_dConstant;
 		m_adAngularVelocity /= i_dConstant;
+
+		return *this;
 	}
 
 protected:
@@ -95,7 +103,32 @@ protected:
 	c_vector<double, 3U> m_adAngularVelocity; //w vector
 };
 
-c_matrix<double, 3U, 3U> GetSkew(
+//namespace boost { namespace numeric { namespace odeint {
+//
+//template<>
+//struct state_wrapper< PhysicalExtrinsicState >
+//{
+//    typedef double value_type;
+//    typedef PhysicalExtrinsicState state_type;
+//    typedef state_wrapper<PhysicalExtrinsicState> state_wrapper_type;
+//    
+//	state_type m_v;
+//
+//    state_wrapper() {}
+//    state_wrapper(const state_wrapper_type & x) {m_v = x.m_v;}
+//    ~state_wrapper() {}
+//};
+//
+//template<>
+//struct is_resizeable<PhysicalExtrinsicState>
+//{
+//	typedef boost::false_type type;
+//	static const bool value = type::value;
+//};
+//
+//}}}
+
+inline c_matrix<double, 3U, 3U> GetSkew(
 	const c_vector<double, 3U> & i_adA)
 {
 	c_matrix<double, 3U, 3U> aadReturnValue;
@@ -118,8 +151,8 @@ c_matrix<double, 3U, 3U> GetSkew(
 //%brilliant! inverse is not directly provided. must LU factor first
 //http://www.crystalclearsoftware.com/cgi-bin/boost_wiki/wiki.pl?LU_Matrix_Inversion
 
-c_vector<double, 3U> SolveLinearSystem(
-	const c_matrix<double, 3U, 3U> & i_aadA,
+inline c_vector<double, 3U> SolveLinearSystem(
+	c_matrix<double, 3U, 3U> i_aadA, //local copy
 	c_vector<double, 3U> i_adX) //local copy
 {
 	permutation_matrix<size_t> aadP(i_aadA.size1()); 
@@ -131,15 +164,16 @@ c_vector<double, 3U> SolveLinearSystem(
 
 //We must support addition of state_type's and scalar multiplication by time_type
 //http://headmyshoulder.github.io/odeint-v2/doc/boost_numeric_odeint/odeint_in_detail/state_types__algebras_and_operations.html
+//%looks like we must also support begin / end on extrinsic state?
 
 class PhysicalIntrinsicState
 {
 public:
-	PhysicalIntrinsicState()
+	explicit PhysicalIntrinsicState()
 		: m_dMass(0.0),
 		m_aadInertia(zero_matrix<double>(3U, 3U)) {} //Invalid state
 
-	PhysicalIntrinsicState(
+	explicit PhysicalIntrinsicState(
 		const double i_dMass,
 		const c_matrix<double, 3U, 3U> & i_aadInertia)
 		: m_dMass(i_dMass),

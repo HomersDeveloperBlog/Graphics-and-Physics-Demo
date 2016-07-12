@@ -1,4 +1,5 @@
 #include "PhysicalObject.h"
+#include "Model.h"
 #include "Scene.h"
 
 using namespace std;
@@ -77,19 +78,19 @@ void Scene::DrawAll()
 		//GLint glnBufferSize = static_cast<GLint>(nBufferSize);
 		//assert(glnBufferSize > 0);
 			
-		pObject->Model().Buffer().Bind();
+		//pObject->DisplayModel().Buffer().Bind(); //%uncomment
 			
 		//Issue draw call.
 		glDrawArrays(
 			GL_TRIANGLES,
 			0,
-			48);//glnBufferSize);
-		if(GetOpenGLError(__FILE__, __LINE__))
-			throw;
-			
-		//Flush
-		glFlush(); //%after the loop?
+			12); //glnBufferSize);
 		if(GetOpenGLError(__FILE__, __LINE__))
 			throw;
 	}
+	
+	//Flush
+	glFlush(); //%after the loop?
+	if(GetOpenGLError(__FILE__, __LINE__))
+		throw;
 }

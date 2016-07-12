@@ -1,27 +1,2 @@
 ﻿  main.cpp
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(20): error C3646: 'm_oModel': unknown override specifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  Scene.cpp
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(20): error C3646: 'm_oModel': unknown override specifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  PhysicalObject.cpp
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(20): error C3646: 'm_oModel': unknown override specifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(6): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(6): error C2143: syntax error: missing ',' before '&'
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(9): error C2511: 'PhysicalObject::PhysicalObject(const int)': overloaded member function not found in 'PhysicalObject'
-  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(7): note: see declaration of 'PhysicalObject'
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(9): error C2065: 'i_oModel': undeclared identifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(10): error C2065: 'i_oIntrinsicState': undeclared identifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(11): error C2065: 'i_oExtrinsicState': undeclared identifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(12): error C2550: 'PhysicalObject::{ctor}': constructor initializer lists are only allowed on constructor definitions
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(13): error C2352: 'PhysicalObject::CheckState': illegal call of non-static member function
-  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(14): note: see declaration of 'PhysicalObject::CheckState'
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(24): error C2065: 'm_oModel': undeclared identifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(54): error C2065: 'm_oModel': undeclared identifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(54): error C2228: left of '.ScalingMatrix' must have class/struct/union
-  c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.cpp(54): note: type is 'unknown-type'
-  DrawScene.cpp
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(20): error C3646: 'm_oModel': unknown override specifier
-c:\users\jordan\documents\github\graphics-and-physics-demo\opengltest1\opengltest1\physicalobject.h(20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  Generating Code...
+  OpenGLTest1.vcxproj -> C:\Users\Jordan\Documents\GitHub\Graphics-and-Physics-Demo\OpenGLTest1\Debug\OpenGLTest1.exe

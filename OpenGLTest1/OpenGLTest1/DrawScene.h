@@ -2,10 +2,14 @@
 
 class Scene;
 
-//void DisplayTriangles( //%export necessary?
-//	GLuint hArrayBuffer,
-//	GLuint hVertexArrayObject,
-//	GLuint i_nTriangleCount,
-//	const GLfloat * i_aafTriangles);
+//%deprecated
+std::tuple<GLuint, GLuint> SetupShaderIO();
+
+//%deprecated
+void DisplayTriangles(
+	GLuint i_hArrayBuffer,
+	GLuint i_hVertexArrayObject,
+	GLuint i_nTriangleCount,
+	const GLfloat * i_vertices);
 
 void GameUpdateLoop(Scene & i_oScene);

@@ -40,11 +40,16 @@ OpenGLBuffer::OpenGLBuffer(
         throw;
         
     //Fill buffer
-    glNamedBufferData( //Overwrites the whole buffer.
-        *m_pglnBufferHandle, 
+	glBufferData(
+        GL_ARRAY_BUFFER, 
         static_cast<GLsizei>(i_nSize), //%need to verify integer conversion. 
         i_pData, 
-        GL_STATIC_DRAW); //%needs abstracting
+		GL_STATIC_DRAW);
+	//glNamedBufferData( //%need higher version for this
+    //    *m_pglnBufferHandle, 
+    //    static_cast<GLsizei>(i_nSize), //%need to verify integer conversion. 
+    //    i_pData, 
+    //    GL_STATIC_DRAW); 
     if(GetOpenGLError(__FILE__, __LINE__))
         throw;
 }
