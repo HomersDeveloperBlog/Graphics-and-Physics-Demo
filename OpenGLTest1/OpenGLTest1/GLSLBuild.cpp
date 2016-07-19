@@ -68,26 +68,32 @@ OpenGLProgram OpenGLProgramSource::BuildProgram()
 		OpenGLShader oShader(oShaderSource);
 
 		//Compile shader
-		if(!oShader.Compile())
-			throw;
+		bool bCompileStatus = oShader.Compile();
 			
 #ifdef _DEBUG
 		//Print compiler message
 		cerr << oShader.GetCompilerMessage() << endl;
 #endif //_DEBUG
 		
+		assert(bCompileStatus);
+		if(!bCompileStatus)
+			throw;
+
 		//Attach shader
 		oProgram.AttachShader(oShader);
 	}
 	
 	//Link program
-	if(!oProgram.Link())
-		throw;
+	bool bLinkStatus = oProgram.Link();
 		
 #ifdef _DEBUG
 	//Print linker message
 	cerr << oProgram.GetLinkerMessage() << endl;
 #endif //_DEBUG
+	
+	assert(bLinkStatus);
+	if(!bLinkStatus)
+		throw;
 
 	//Detatch all shaders.
 	oProgram.DetachAll();

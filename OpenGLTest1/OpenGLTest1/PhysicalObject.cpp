@@ -33,7 +33,7 @@ void PhysicalObject::AdvanceState(
 	stepper.do_step(
 		m_oIntrinsicState, //.operator(),
 		oState, //State info to evolve.
-		0, //current time. %Could store last update? Have AdvanceState input provide current time?
+		0, //current time.
 		m_oExtrinsicState,
 		i_dDT);
 	

@@ -1,6 +1,6 @@
 #version 430 core
 
-out vec4 fColor;
+layout(location = 0) out vec4 fColor;
 
 void main()
 {

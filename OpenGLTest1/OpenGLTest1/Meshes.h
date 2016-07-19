@@ -29,6 +29,12 @@ static const size_t anMeshTriangleCount[MESH_COUNT] =
 	nTriangleCount1
 };
 
+static const size_t anMeshVertexCount[MESH_COUNT] = 
+{
+	nTriangleCount0 * 3U,
+	nTriangleCount1 * 3U
+};
+
 static const size_t anMeshByteCount[MESH_COUNT] = 
 {
 	nTriangleCount0 * 3U * 2U * sizeof(float), 
