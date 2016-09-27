@@ -1,4 +1,4 @@
 # Graphics-and-Physics-Demo
 A demo program for game physics and graphics in OpenGL.
 
-There's code here, but it's mostly garbage. Avert your eyes.
+Its hopelessly incomplete, only succeeding a rendering a square. Its got computational physics code, and some good structure, and should be ripe to breakout into something more interesting.
